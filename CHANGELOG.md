@@ -138,3 +138,5 @@ Format: version · date · what changed and why.
 3. Increment `versionName` (e.g. `"1.2"` → `"1.3"`)
 4. Add a new entry at the top of this file describing what changed
 5. Run the build — the APK will be named `rhombuschess-vX.X-debug.apk` automatically
+# test
+# test line
