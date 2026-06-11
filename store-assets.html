@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html>
+<head><title>4D Rhombus Chess - Play Store Assets</title></head>
+<body style="background:#111;display:flex;flex-direction:column;align-items:center;gap:30px;padding:40px;font-family:sans-serif;color:#fff;">
+<h2>4D Rhombus Chess — Play Store Assets Generator</h2>
+<p style="color:#aaa;">Right-click each image → "Save image as..." to download</p>
+
+<!-- FEATURE GRAPHIC -->
+<h3 style="color:#4af;margin-top:20px;">Feature Graphic (1024x500)</h3>
+<canvas id="feature" width="1024" height="500"></canvas>
+
+<!-- SCREENSHOTS -->
+<h3 style="color:#4af;margin-top:30px;">Phone Screenshots (1080x1920)</h3>
+<div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;">
+  <div style="text-align:center;"><canvas id="ss1" width="1080" height="1920"></canvas><p>1 - Hero</p></div>
+  <div style="text-align:center;"><canvas id="ss2" width="1080" height="1920"></canvas><p>2 - Multi-Level</p></div>
+  <div style="text-align:center;"><canvas id="ss3" width="1080" height="1920"></canvas><p>3 - AI Battle</p></div>
+  <div style="text-align:center;"><canvas id="ss4" width="1080" height="1920"></canvas><p>4 - Features</p></div>
+  <div style="text-align:center;"><canvas id="ss5" width="1080" height="1920"></canvas><p>5 - Themes</p></div>
+</div>
+
+<!-- PROMO BANNER -->
+<h3 style="color:#4af;margin-top:30px;">Promotional Banner (4096x2304 - TV Banner)</h3>
+<canvas id="tvbanner" width="4096" height="2304"></canvas>
+
+<script>
+// ═══════════════════════════════════════════
+// SHARED DRAWING UTILITIES
+// ═══════════════════════════════════════════
+
+function drawSpaceBg(ctx, w, h) {
+  var bg = ctx.createRadialGradient(w/2, h*0.4, 0, w/2, h*0.4, Math.max(w,h)*0.8);
+  bg.addColorStop(0, '#0a1e3a');
+  bg.addColorStop(0.5, '#051428');
+  bg.addColorStop(1, '#020a14');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, w, h);
+  // Stars
+  ctx.fillStyle = 'rgba(255,255,255,0.25)';
+  for (var i = 0; i < 120; i++) {
+    ctx.fillRect((i*137.508+50)%w, (i*97.312+30)%h, 1.5, 1.5);
+  }
+}
+
+function drawGlow(ctx, x, y, r, color, alpha) {
+  var g = ctx.createRadialGradient(x, y, 0, x, y, r);
+  g.addColorStop(0, color.replace(')', ','+alpha+')').replace('rgb','rgba'));
+  g.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(x-r, y-r, r*2, r*2);
+}
+
+function drawRhombusBoard(ctx, cx, cy, size, alpha, color, showGrid) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - size*0.5);
+  ctx.lineTo(cx + size, cy);
+  ctx.lineTo(cx, cy + size*0.5);
+  ctx.lineTo(cx - size, cy);
+  ctx.closePath();
+  var tg = ctx.createLinearGradient(cx-size, cy, cx+size, cy);
+  tg.addColorStop(0, color);
+  tg.addColorStop(0.5, lighten(color, 30));
+  tg.addColorStop(1, color);
+  ctx.fillStyle = tg;
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(100,180,255,0.6)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  if (showGrid) {
+    var gridSize = 4;
+    for (var gx = 0; gx < gridSize; gx++) {
+      for (var gz = 0; gz < gridSize; gz++) {
+        if ((gx+gz)%2===0) continue;
+        var cellW = size*2/gridSize, cellH = size/gridSize;
+        var px = cx - size + gx*cellW + cellW/2;
+        var py = cy - size*0.5/2 + gz*cellH;
+        var tx = cx + (px-cx), ty = cy + (py-cy)*0.5;
+        ctx.fillStyle = 'rgba(0,20,50,0.4)';
+        ctx.beginPath();
+        var cw2=cellW*0.45, ch2=cellH*0.22;
+        ctx.moveTo(tx, ty-ch2);
+        ctx.lineTo(tx+cw2, ty);
+        ctx.lineTo(tx, ty+ch2);
+        ctx.lineTo(tx-cw2, ty);
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
+  }
+  ctx.restore();
+}
+
+function drawStackedBoards(ctx, cx, cy, count, baseSize, spacing) {
+  for (var i = 0; i < count; i++) {
+    var t = i / (count-1);
+    var sz = baseSize * (0.5 + 0.5 * (1 - Math.abs(t*2-1)));
+    var alpha = 0.3 + 0.5 * (1 - Math.abs(t*2-1));
+    var yy = cy + (i - count/2) * spacing;
+    var blue = Math.floor(40 + 80 * (1 - Math.abs(t*2-1)));
+    drawRhombusBoard(ctx, cx, yy, sz, alpha, 'rgb(20,'+blue+','+Math.floor(blue*1.5)+')', i === Math.floor(count/2));
+  }
+}
+
+function drawKingPiece(ctx, kx, ky, scale) {
+  var s = scale;
+  // Shadow
+  ctx.save();
+  ctx.globalAlpha = 0.3;
+  ctx.beginPath();
+  ctx.ellipse(kx, ky+50*s, 35*s, 12*s, 0, 0, Math.PI*2);
+  ctx.fillStyle = '#000';
+  ctx.fill();
+  ctx.restore();
+  // Body
+  var kg = ctx.createLinearGradient(kx-25*s, ky-20*s, kx+25*s, ky+50*s);
+  kg.addColorStop(0, '#e0e8f0');
+  kg.addColorStop(0.5, '#c0d0e0');
+  kg.addColorStop(1, '#8899aa');
+  ctx.fillStyle = kg;
+  // Base
+  ctx.beginPath();
+  ctx.ellipse(kx, ky+45*s, 32*s, 11*s, 0, 0, Math.PI*2);
+  ctx.fill();
+  // Body
+  ctx.beginPath();
+  ctx.moveTo(kx-28*s, ky+45*s);
+  ctx.lineTo(kx-16*s, ky-10*s);
+  ctx.quadraticCurveTo(kx, ky-25*s, kx+16*s, ky-10*s);
+  ctx.lineTo(kx+28*s, ky+45*s);
+  ctx.closePath();
+  ctx.fill();
+  // Head
+  ctx.beginPath();
+  ctx.arc(kx, ky-5*s, 20*s, 0, Math.PI*2);
+  ctx.fillStyle = '#d0dce8';
+  ctx.fill();
+  // Crown
+  ctx.strokeStyle = '#ffcc44';
+  ctx.lineWidth = 2.5*s;
+  ctx.shadowColor = '#ffaa00';
+  ctx.shadowBlur = 10*s;
+  ctx.beginPath();
+  ctx.moveTo(kx, ky-30*s);
+  ctx.lineTo(kx, ky-18*s);
+  ctx.moveTo(kx-6*s, ky-24*s);
+  ctx.lineTo(kx+6*s, ky-24*s);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(kx, ky-5*s, 24*s, 0, Math.PI*2);
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+  // Visor
+  ctx.fillStyle = 'rgba(10,20,40,0.8)';
+  ctx.fillRect(kx-12*s, ky-8*s, 24*s, 6*s);
+  // Eyes
+  ctx.shadowColor = '#44aaff';
+  ctx.shadowBlur = 6*s;
+  ctx.fillStyle = '#44aaff';
+  ctx.beginPath();
+  ctx.arc(kx-5*s, ky-5*s, 2.5*s, 0, Math.PI*2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(kx+5*s, ky-5*s, 2.5*s, 0, Math.PI*2);
+  ctx.fill();
+  ctx.shadowBlur = 0;
+}
+
+function drawTitle4D(ctx, x, y, size) {
+  ctx.save();
+  ctx.font = 'bold '+size+'px "Arial Black", Impact, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#fff';
+  ctx.shadowColor = 'rgba(68,170,255,0.8)';
+  ctx.shadowBlur = size*0.3;
+  ctx.fillText('4D', x, y);
+  ctx.shadowBlur = 0;
+  ctx.restore();
+}
+
+function drawSubtitle(ctx, x, y, text, size, color) {
+  ctx.save();
+  ctx.font = 'bold '+size+'px "Arial Black", Impact, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = color || 'rgba(100,180,255,0.9)';
+  ctx.shadowColor = 'rgba(68,170,255,0.5)';
+  ctx.shadowBlur = size*0.2;
+  ctx.fillText(text, x, y);
+  ctx.shadowBlur = 0;
+  ctx.restore();
+}
+
+function drawAccentLine(ctx, x1, x2, y, alpha) {
+  ctx.strokeStyle = 'rgba(68,170,255,'+(alpha||0.4)+')';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(x1, y);
+  ctx.lineTo(x2, y);
+  ctx.stroke();
+}
+
+function drawFeatureBadge(ctx, x, y, icon, text, w, h) {
+  w = w || 280; h = h || 70;
+  ctx.fillStyle = 'rgba(0,15,35,0.9)';
+  ctx.strokeStyle = 'rgba(100,180,255,0.4)';
+  ctx.lineWidth = 1.5;
+  roundRect(ctx, x-w/2, y-h/2, w, h, 10);
+  ctx.fill();
+  ctx.stroke();
+  ctx.font = '28px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#fff';
+  ctx.fillText(icon + '  ' + text, x, y);
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+  ctx.lineTo(x+r, y+h);
+  ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+  ctx.lineTo(x, y+r);
+  ctx.quadraticCurveTo(x, y, x+r, y);
+  ctx.closePath();
+}
+
+function lighten(hex, amt) {
+  if (hex.startsWith('rgb')) {
+    var m = hex.match(/(\d+)/g);
+    return 'rgb('+Math.min(255,+m[0]+amt)+','+Math.min(255,+m[1]+amt)+','+Math.min(255,+m[2]+amt)+')';
+  }
+  var c = parseInt(hex.replace('#',''), 16);
+  var r = Math.min(255, ((c>>16)&0xff) + amt);
+  var g = Math.min(255, ((c>>8)&0xff) + amt);
+  var b = Math.min(255, (c&0xff) + amt);
+  return 'rgb('+r+','+g+','+b+')';
+}
+
+function drawPhoneFrame(ctx, x, y, w, h, contentDraw) {
+  // Phone bezel
+  ctx.save();
+  roundRect(ctx, x, y, w, h, 30);
+  ctx.fillStyle = '#1a1a1a';
+  ctx.fill();
+  ctx.strokeStyle = '#333';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  // Screen area
+  ctx.save();
+  ctx.beginPath();
+  roundRect(ctx, x+8, y+8, w-16, h-16, 22);
+  ctx.clip();
+  contentDraw(ctx, x+8, y+8, w-16, h-16);
+  ctx.restore();
+  ctx.restore();
+}
+
+// ═══════════════════════════════════════════
+// FEATURE GRAPHIC (1024x500)
+// ═══════════════════════════════════════════
+(function(){
+  var c = document.getElementById('feature');
+  var ctx = c.getContext('2d');
+  var w=1024, h=500;
+
+  drawSpaceBg(ctx, w, h);
+
+  // Center glow
+  drawGlow(ctx, w*0.35, h*0.5, 300, 'rgb(40,100,200)', 0.15);
+
+  // Stacked boards on the left
+  drawStackedBoards(ctx, w*0.28, h*0.5, 7, w*0.15, 40);
+
+  // King piece
+  drawKingPiece(ctx, w*0.28, h*0.28, 1.2);
+
+  // Title on the right
+  drawTitle4D(ctx, w*0.68, h*0.28, 120);
+  drawSubtitle(ctx, w*0.68, h*0.48, 'RHOMBUS', 52);
+  drawSubtitle(ctx, w*0.68, h*0.60, 'CHESS', 52);
+
+  // Accent line
+  drawAccentLine(ctx, w*0.52, w*0.84, h*0.72);
+
+  // Tagline
+  ctx.font = '18px "Arial", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(100,180,255,0.5)';
+  ctx.fillText('MULTI-LEVEL 3D STRATEGIC CHESS', w*0.68, h*0.80);
+})();
+
+// ═══════════════════════════════════════════
+// SCREENSHOT 1 - HERO
+// ═══════════════════════════════════════════
+(function(){
+  var c = document.getElementById('ss1');
+  var ctx = c.getContext('2d');
+  var w=1080, h=1920;
+
+  drawSpaceBg(ctx, w, h);
+  drawGlow(ctx, w/2, h*0.45, 500, 'rgb(40,100,200)', 0.12);
+
+  // Title
+  drawTitle4D(ctx, w/2, h*0.10, 160);
+  drawSubtitle(ctx, w/2, h*0.16, 'RHOMBUS CHESS', 64);
+  drawAccentLine(ctx, w*0.2, w*0.8, h*0.20);
+
+  // Big stacked board
+  drawStackedBoards(ctx, w/2, h*0.45, 9, w*0.28, 55);
+
+  // King piece on the board
+  drawKingPiece(ctx, w/2, h*0.30, 1.8);
+
+  // Tagline
+  drawSubtitle(ctx, w/2, h*0.72, 'CHESS EVOLVED', 48, 'rgba(255,255,255,0.9)');
+  drawSubtitle(ctx, w/2, h*0.77, 'INTO THE 4TH DIMENSION', 36, 'rgba(100,180,255,0.7)');
+
+  // Feature badges at bottom
+  drawFeatureBadge(ctx, w/2, h*0.84, '🧠', 'VS AI  or  2 PLAYERS', 400, 60);
+  drawFeatureBadge(ctx, w/2, h*0.89, '🏗️', '15 OR 7 LEVEL BOARDS', 400, 60);
+  drawFeatureBadge(ctx, w/2, h*0.94, '🎨', '5 UNIQUE THEMES', 400, 60);
+})();
+
+// ═══════════════════════════════════════════
+// SCREENSHOT 2 - MULTI-LEVEL
+// ═══════════════════════════════════════════
+(function(){
+  var c = document.getElementById('ss2');
+  var ctx = c.getContext('2d');
+  var w=1080, h=1920;
+
+  drawSpaceBg(ctx, w, h);
+
+  // Top label
+  drawSubtitle(ctx, w/2, h*0.06, 'MULTI-LEVEL BOARDS', 44, '#fff');
+  drawAccentLine(ctx, w*0.15, w*0.85, h*0.09);
+
+  // Left: 15-level board
+  ctx.save();
+  drawGlow(ctx, w*0.35, h*0.38, 300, 'rgb(40,100,200)', 0.1);
+  drawStackedBoards(ctx, w*0.35, h*0.38, 15, w*0.12, 28);
+  drawSubtitle(ctx, w*0.35, h*0.64, '15 LEVELS', 36, '#fff');
+  ctx.font = '22px "Arial", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(100,180,255,0.6)';
+  ctx.fillText('Full rhombus shape', w*0.35, h*0.68);
+  ctx.fillText('1→8→1 board widths', w*0.35, h*0.71);
+  ctx.restore();
+
+  // Right: 7-level board
+  ctx.save();
+  drawGlow(ctx, w*0.7, h*0.38, 300, 'rgb(40,100,200)', 0.1);
+  drawStackedBoards(ctx, w*0.7, h*0.38, 7, w*0.14, 45);
+  drawSubtitle(ctx, w*0.7, h*0.64, '7 LEVELS', 36, '#fff');
+  ctx.font = '22px "Arial", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(100,180,255,0.6)';
+  ctx.fillText('Quick matches', w*0.7, h*0.68);
+  ctx.fillText('2→8→2 board widths', w*0.7, h*0.71);
+  ctx.restore();
+
+  // "VS" between them
+  drawSubtitle(ctx, w/2, h*0.38, 'OR', 40, 'rgba(255,200,60,0.8)');
+
+  // Bottom section - Rhombus explanation
+  drawAccentLine(ctx, w*0.15, w*0.85, h*0.76);
+  drawSubtitle(ctx, w/2, h*0.80, 'RHOMBUS SHAPE', 40, '#fff');
+
+  // Draw rhombus taper visualization
+  var levels = [1,2,3,4,5,6,7,8,7,6,5,4,3,2,1];
+  var startY = h*0.84;
+  for (var i = 0; i < levels.length; i++) {
+    var lw = levels[i] * 45;
+    var ly = startY + i * 12;
+    var alpha = 0.3 + 0.5 * (levels[i]/8);
+    ctx.fillStyle = 'rgba(40,100,200,'+alpha+')';
+    roundRect(ctx, w/2-lw/2, ly, lw, 10, 3);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(100,180,255,0.4)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+  ctx.font = '16px "Arial", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillStyle = 'rgba(100,180,255,0.5)';
+  ctx.fillText('← Narrow', w/2+200, startY+7*12);
+  ctx.textAlign = 'right';
+  ctx.fillText('Wide →', w/2-200, startY+7*12);
+})();
+
+// ═══════════════════════════════════════════
+// SCREENSHOT 3 - AI BATTLE
+// ═══════════════════════════════════════════
+(function(){
+  var c = document.getElementById('ss3');
+  var ctx = c.getContext('2d');
+  var w=1080, h=1920;
+
+  drawSpaceBg(ctx, w, h);
+  drawGlow(ctx, w/2, h*0.4, 400, 'rgb(40,100,200)', 0.1);
+
+  // Title
+  drawSubtitle(ctx, w/2, h*0.06, 'BATTLE THE AI', 48, '#fff');
+  drawAccentLine(ctx, w*0.2, w*0.8, h*0.09);
+
+  // VS graphic
+  // White king (player)
+  drawKingPiece(ctx, w*0.3, h*0.22, 2.0);
+  ctx.font = 'bold 30px "Arial Black", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#fff';
+  ctx.fillText('YOU', w*0.3, h*0.33);
+
+  // VS
+  drawSubtitle(ctx, w/2, h*0.24, 'VS', 60, 'rgba(255,100,50,0.9)');
+
+  // Black king (AI)
+  ctx.save();
+  ctx.globalAlpha = 0.7;
+  drawKingPiece(ctx, w*0.7, h*0.22, 2.0);
+  ctx.restore();
+  ctx.font = 'bold 30px "Arial Black", sans-serif';
+  ctx.fillStyle = 'rgba(255,100,50,0.9)';
+  ctx.fillText('AI', w*0.7, h*0.33);
+
+  // Board in background
+  drawStackedBoards(ctx, w/2, h*0.52, 7, w*0.22, 50);
+
+  // Difficulty levels
+  drawAccentLine(ctx, w*0.15, w*0.85, h*0.72);
+  drawSubtitle(ctx, w/2, h*0.76, '3 DIFFICULTY LEVELS', 38, '#fff');
+
+  // Difficulty cards
+  var diffs = [
+    {name:'EASY', desc:'Learn the ropes', color:'rgba(50,200,100,0.8)', icon:'🟢'},
+    {name:'MEDIUM', desc:'Balanced challenge', color:'rgba(255,200,50,0.8)', icon:'🟡'},
+    {name:'HARD', desc:'For masters only', color:'rgba(255,60,60,0.8)', icon:'🔴'}
+  ];
+  diffs.forEach(function(d, i){
+    var dy = h*0.82 + i*80;
+    ctx.fillStyle = 'rgba(0,15,35,0.85)';
+    ctx.strokeStyle = 'rgba(100,180,255,0.3)';
+    ctx.lineWidth = 1.5;
+    roundRect(ctx, w*0.15, dy-25, w*0.7, 60, 8);
+    ctx.fill(); ctx.stroke();
+    ctx.font = 'bold 28px "Arial Black", sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = d.color;
+    ctx.fillText(d.icon + '  ' + d.name, w*0.22, dy+8);
+    ctx.font = '20px "Arial", sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillStyle = 'rgba(100,180,255,0.6)';
+    ctx.fillText(d.desc, w*0.8, dy+8);
+  });
+})();
+
+// ═══════════════════════════════════════════
+// SCREENSHOT 4 - FEATURES
+// ═══════════════════════════════════════════
+(function(){
+  var c = document.getElementById('ss4');
+  var ctx = c.getContext('2d');
+  var w=1080, h=1920;
+
+  drawSpaceBg(ctx, w, h);
+
+  drawSubtitle(ctx, w/2, h*0.06, 'PACKED WITH FEATURES', 44, '#fff');
+  drawAccentLine(ctx, w*0.15, w*0.85, h*0.09);
+
+  var features = [
+    {icon:'♛', title:'PAWN PROMOTION', desc:'Choose Queen, Rook, Bishop, or Knight'},
+    {icon:'↩', title:'UNDO MOVES', desc:'Take back mistakes instantly'},
+    {icon:'⏱', title:'GAME CLOCK', desc:'Track time for both players'},
+    {icon:'💾', title:'SAVE & LOAD', desc:'Resume your game anytime'},
+    {icon:'📋', title:'MOVE LOG', desc:'Full history of every move'},
+    {icon:'⚠', title:'THREAT DETECTION', desc:'See which pieces are in danger'},
+    {icon:'🎯', title:'MOVE HIGHLIGHTS', desc:'Valid moves shown in 3D'},
+    {icon:'📐', title:'CAMERA PRESETS', desc:'Top, Side, White/Black POV'},
+    {icon:'🔄', title:'LEVEL SLIDER', desc:'Isolate and inspect any level'},
+    {icon:'📊', title:'WIN/LOSS RECORD', desc:'Track your performance'},
+    {icon:'📖', title:'BUILT-IN TUTORIAL', desc:'Learn the rules instantly'},
+    {icon:'🏗️', title:'BOARD SIZE TOGGLE', desc:'Switch 15 or 7 levels mid-game'}
+  ];
+
+  features.forEach(function(f, i){
+    var fy = h*0.13 + i * (h*0.068);
+    var isEven = i%2===0;
+    ctx.fillStyle = isEven ? 'rgba(0,15,35,0.85)' : 'rgba(5,20,40,0.85)';
+    ctx.strokeStyle = 'rgba(100,180,255,0.2)';
+    ctx.lineWidth = 1;
+    roundRect(ctx, w*0.06, fy-28, w*0.88, 54, 6);
+    ctx.fill(); ctx.stroke();
+
+    // Icon
+    ctx.font = '30px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#fff';
+    ctx.fillText(f.icon, w*0.12, fy);
+
+    // Title
+    ctx.font = 'bold 22px "Arial Black", sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#fff';
+    ctx.fillText(f.title, w*0.19, fy-5);
+
+    // Description
+    ctx.font = '18px "Arial", sans-serif';
+    ctx.fillStyle = 'rgba(100,180,255,0.6)';
+    ctx.fillText(f.desc, w*0.19, fy+18);
+  });
+
+  // Bottom CTA
+  drawAccentLine(ctx, w*0.2, w*0.8, h*0.96);
+  ctx.font = '22px "Arial", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(100,180,255,0.5)';
+  ctx.fillText('AND MUCH MORE...', w/2, h*0.98);
+})();
+
+// ═══════════════════════════════════════════
+// SCREENSHOT 5 - THEMES
+// ═══════════════════════════════════════════
+(function(){
+  var c = document.getElementById('ss5');
+  var ctx = c.getContext('2d');
+  var w=1080, h=1920;
+
+  drawSpaceBg(ctx, w, h);
+
+  drawSubtitle(ctx, w/2, h*0.06, '5 UNIQUE THEMES', 48, '#fff');
+  drawAccentLine(ctx, w*0.2, w*0.8, h*0.09);
+
+  var themes = [
+    {name:'TROOPER', icon:'🪖', color1:'#8aaabb', color2:'#111a22', accent:'#3399ff', desc:'Military sci-fi'},
+    {name:'ROBOTS', icon:'🤖', color1:'#556688', color2:'#1a1a2e', accent:'#44aaff', desc:'Cyberpunk machines'},
+    {name:'CRYSTALS', icon:'💎', color1:'#445566', color2:'#112233', accent:'#88ddff', desc:'Ethereal gems'},
+    {name:'MEDIEVAL', icon:'⚔️', color1:'#887755', color2:'#2a2a1a', accent:'#ddaa44', desc:'Classic fantasy'},
+    {name:'ALIENS', icon:'👾', color1:'#336633', color2:'#112211', accent:'#44ff88', desc:'Extraterrestrial'}
+  ];
+
+  themes.forEach(function(t, i){
+    var ty = h*0.14 + i * (h*0.165);
+    var cardH = h*0.14;
+
+    // Card background
+    ctx.fillStyle = 'rgba(0,15,30,0.9)';
+    ctx.strokeStyle = t.accent;
+    ctx.lineWidth = 2;
+    roundRect(ctx, w*0.06, ty, w*0.88, cardH, 12);
+    ctx.fill(); ctx.stroke();
+
+    // Theme icon
+    ctx.font = '60px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(t.icon, w*0.16, ty+cardH*0.4);
+
+    // Theme name
+    ctx.font = 'bold 36px "Arial Black", sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#fff';
+    ctx.fillText(t.name, w*0.26, ty+cardH*0.35);
+
+    // Description
+    ctx.font = '22px "Arial", sans-serif';
+    ctx.fillStyle = 'rgba(100,180,255,0.6)';
+    ctx.fillText(t.desc, w*0.26, ty+cardH*0.55);
+
+    // Mini board preview
+    var bx = w*0.75, by = ty+cardH*0.5;
+    // Light tile
+    ctx.fillStyle = t.color1;
+    ctx.fillRect(bx-30, by-30, 28, 28);
+    ctx.fillRect(bx+2, by+2, 28, 28);
+    // Dark tile
+    ctx.fillStyle = t.color2;
+    ctx.fillRect(bx+2, by-30, 28, 28);
+    ctx.fillRect(bx-30, by+2, 28, 28);
+    // Border
+    ctx.strokeStyle = t.accent;
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(bx-32, by-32, 62, 62);
+
+    // Accent glow
+    var ag = ctx.createRadialGradient(bx, by, 0, bx, by, 50);
+    ag.addColorStop(0, t.accent.replace(')', ',0.15)').replace('rgb','rgba').replace('#', ''));
+    ag.addColorStop(1, 'rgba(0,0,0,0)');
+    // Small accent dot
+    ctx.beginPath();
+    ctx.arc(bx, by, 3, 0, Math.PI*2);
+    ctx.fillStyle = t.accent;
+    ctx.fill();
+  });
+
+  // Bottom text
+  drawSubtitle(ctx, w/2, h*0.96, 'SWITCH THEMES ANYTIME', 28, 'rgba(100,180,255,0.5)');
+})();
+
+// ═══════════════════════════════════════════
+// TV BANNER (4096x2304)
+// ═══════════════════════════════════════════
+(function(){
+  var c = document.getElementById('tvbanner');
+  var ctx = c.getContext('2d');
+  var w=4096, h=2304;
+
+  drawSpaceBg(ctx, w, h);
+  // Extra stars for large canvas
+  ctx.fillStyle = 'rgba(255,255,255,0.2)';
+  for (var i = 120; i < 400; i++) {
+    ctx.fillRect((i*137.508+50)%w, (i*97.312+30)%h, 2, 2);
+  }
+
+  drawGlow(ctx, w*0.3, h*0.5, 800, 'rgb(40,100,200)', 0.12);
+
+  // Big stacked boards
+  drawStackedBoards(ctx, w*0.3, h*0.5, 9, w*0.12, 90);
+
+  // King piece
+  drawKingPiece(ctx, w*0.3, h*0.28, 3.5);
+
+  // Title
+  drawTitle4D(ctx, w*0.65, h*0.3, 280);
+  drawSubtitle(ctx, w*0.65, h*0.48, 'RHOMBUS', 120);
+  drawSubtitle(ctx, w*0.65, h*0.60, 'CHESS', 120);
+  drawAccentLine(ctx, w*0.45, w*0.85, h*0.68, 0.4);
+
+  ctx.font = '42px "Arial", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(100,180,255,0.5)';
+  ctx.fillText('MULTI-LEVEL 3D STRATEGIC CHESS', w*0.65, h*0.74);
+
+  // Feature badges
+  drawFeatureBadge(ctx, w*0.55, h*0.84, '🧠', 'AI OPPONENT', 350, 65);
+  drawFeatureBadge(ctx, w*0.75, h*0.84, '🏗️', '15 OR 7 LEVELS', 350, 65);
+  drawFeatureBadge(ctx, w*0.55, h*0.91, '🎨', '5 THEMES', 350, 65);
+  drawFeatureBadge(ctx, w*0.75, h*0.91, '♛', 'FULL CHESS RULES', 350, 65);
+})();
+
+// Scale canvases for display
+document.querySelectorAll('canvas').forEach(function(c){
+  if (c.width > 600) {
+    c.style.width = Math.min(c.width, 400) + 'px';
+    c.style.height = 'auto';
+  }
+});
+</script>
+</body>
+</html>

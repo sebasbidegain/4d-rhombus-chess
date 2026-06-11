@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>4D Rhombus Chess — Rules Reference</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a0e1a;color:#e0e8f0;font-family:'Segoe UI',Arial,sans-serif;padding:30px;}
+h1{text-align:center;font-size:36px;color:#4af;margin-bottom:8px;text-shadow:0 0 20px rgba(68,170,255,0.3);}
+.sub{text-align:center;color:#7a8a9a;margin-bottom:40px;font-size:16px;}
+.grid{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;max-width:1400px;margin:0 auto;}
+.card{background:linear-gradient(135deg,#111828,#0d1520);border:1px solid #1a2a3a;border-radius:16px;width:420px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.4);}
+.card canvas{display:block;width:100%;height:auto;}
+.card .info{padding:16px 20px;}
+.card h3{font-size:18px;color:#fff;margin-bottom:6px;}
+.card p{font-size:13px;color:#8a9aaa;line-height:1.5;}
+.status{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:bold;margin-bottom:8px;}
+.implemented{background:#0a3a1a;color:#4f4;border:1px solid #2a5a2a;}
+.missing{background:#3a1a0a;color:#f84;border:1px solid #5a2a1a;}
+.bug{background:#3a0a0a;color:#f44;border:1px solid #5a1a1a;}
+.section{width:100%;text-align:center;margin:30px 0 10px;font-size:24px;color:#4af;border-bottom:1px solid #1a2a4a;padding-bottom:10px;}
+</style>
+</head>
+<body>
+<h1>♛ 4D Rhombus Chess — Rules</h1>
+<p class="sub">All chess rules currently applied in the game — with multi-level 3D movement</p>
+
+<div class="grid">
+
+<div class="section">♟ Piece Movement (3D Multi-Level)</div>
+
+<div class="card">
+<canvas id="c_pawn" width="420" height="480"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>♟ Pawn Movement (3D)</h3>
+<p><b>Same level:</b> 1 square forward on X-axis. Captures diagonally on Z-axis.<br>
+<b>Cross-level:</b> Both white and black can move to <b>either</b> adjacent level (L+1 or L-1), keeping the same X/Z position. Can also capture diagonally on either adjacent level.</p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_pawn2" width="420" height="380"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>♟ Pawn Double Move</h3>
+<p>On their first move, pawns can advance 2 squares forward instead of 1 (on the same level only), as long as both squares are empty. Starting position: row 1 (white) or row 6 (black).</p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_rook" width="420" height="380"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>♜ Rook Movement (3D)</h3>
+<p><b>Same level:</b> Slides any distance along X-axis or Z-axis (4 directions).<br>
+<b>Cross-level:</b> Slides straight up or down through levels (2 directions). <b>6 total directions.</b> Cannot jump over pieces.</p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_bishop" width="420" height="380"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>♝ Bishop Movement (3D)</h3>
+<p><b>Same level:</b> 4 diagonals (X+Z, X-Z, -X+Z, -X-Z).<br>
+<b>Cross-level:</b> 4 diagonals through levels (L+X, L-X, -L+X, -L-X). <b>8 total directions.</b> Cannot jump over pieces.</p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_knight" width="420" height="380"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>♞ Knight Movement (3D)</h3>
+<p><b>Same level:</b> 8 classic L-shaped jumps (2+1 pattern).<br>
+<b>Cross-level:</b> 8 diagonal jumps — 1 level ± 1 X ± 1 Z (all 8 combinations). <b>16 total moves. Can jump over pieces.</b></p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_queen" width="420" height="380"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>♛ Queen Movement (3D)</h3>
+<p><b>Same level:</b> 4 straight + 4 diagonals (like rook + bishop).<br>
+<b>Cross-level:</b> Straight up/down (L), plus L+X, L-X, L+Z, L-Z diagonals. <b>18 total directions.</b> Most powerful piece.</p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_king" width="420" height="380"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>♚ King Movement (3D)</h3>
+<p><b>All directions:</b> 1 square in any of the 26 adjacent cells — including diagonals and cross-level moves. Moves in a 3×3×3 cube around its position (minus itself).</p>
+</div>
+</div>
+
+<div class="section">⚔️ Captures & Special Rules</div>
+
+<div class="card">
+<canvas id="c_capture" width="420" height="380"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>⚔️ Captures Across Levels</h3>
+<p><b>Same level:</b> Any piece captures by moving to an enemy's square on the same board.<br>
+<b>Cross-level:</b> Pieces that can move to another level can also capture there — a rook sliding up, a bishop sliding diagonally, a knight jumping, etc. Captures work identically across all 15 levels.</p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_pawnpromo" width="420" height="320"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>♛ Pawn Promotion</h3>
+<p>A pawn promotes when it reaches <b>column 7</b> (white) or <b>column 0</b> (black) — the last column of the center level — regardless of which level the pawn is on. Works the same in both <b>7-level</b> and <b>15-level</b> mode. Player chooses: Queen, Rook, Bishop, or Knight. AI auto-promotes to Queen.</p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_enpassant" width="420" height="380"></canvas>
+<div class="info">
+<span class="status missing">✗ NOT IMPLEMENTED</span>
+<h3>👻 En Passant</h3>
+<p>When a pawn advances 2 squares and lands beside an enemy pawn, the enemy can capture it as if it only moved 1 square. Not implemented on any level — neither same-level nor cross-level.</p>
+</div>
+</div>
+
+<div class="section">👑 King & Check Rules (Multi-Level)</div>
+
+<div class="card">
+<canvas id="c_check" width="420" height="380"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>⚡ Check Detection (3D)</h3>
+<p>The game scans <b>every piece on every level</b> to detect if the king is under attack. A rook on level 3 can put a king on level 8 in check by sliding straight up. Works across all 7 or 15 levels. "CHECK!" warning appears and king flashes red.</p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_checkmate" width="420" height="380"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>☠️ Checkmate (3D)</h3>
+<p>Checkmate is checked across <b>all levels</b>. The king must have zero escape moves on any level — same level, level above, or level below. An attacker from another level can deliver checkmate. Game ends with "CHECKMATE!"</p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_stalemate" width="420" height="380"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>🤝 Stalemate (3D)</h3>
+<p>Stalemate is evaluated across all levels and all pieces. If a player has <b>no legal moves on any level</b> and is not in check, it's a draw. The extra levels give more escape routes, making stalemate harder to achieve than in standard chess.</p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_nocheck" width="420" height="300"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>🛡️ Illegal Move Prevention</h3>
+<p>All moves are now validated before being shown or allowed. Any move that would leave your own king in check is filtered out — on any level. This applies to all pieces: moving away from protecting the king, moving the king into an attacked square, etc.</p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_castling" width="420" height="300"></canvas>
+<div class="info">
+<span class="status missing">✗ NOT IMPLEMENTED</span>
+<h3>🏰 Castling</h3>
+<p>King moves 2 squares toward a rook, and the rook jumps over. Requires: neither piece has moved, no pieces between them, king not in/through check.</p>
+</div>
+</div>
+
+<div class="section">🎮 Game Rules</div>
+
+<div class="card">
+<canvas id="c_turns" width="420" height="300"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>🔄 Turn System</h3>
+<p>White always moves first. Turns alternate between white and black. You cannot move your opponent's pieces. Move counter tracks progression.</p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_levels" width="420" height="380"></canvas>
+<div class="info">
+<span class="status implemented">✓ IMPLEMENTED</span>
+<h3>🏗️ Multi-Level Board</h3>
+<p>15 (or 7) stacked levels in a rhombus shape. Middle level is widest (8×8), levels narrow toward top and bottom. All pieces can move between levels.</p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_50move" width="420" height="300"></canvas>
+<div class="info">
+<span class="status missing">✗ NOT IMPLEMENTED</span>
+<h3>📏 50-Move Rule</h3>
+<p>In standard chess, if 50 moves pass with no captures or pawn moves, either player can claim a draw. Not tracked in the current game.</p>
+</div>
+</div>
+
+<div class="card">
+<canvas id="c_threefold" width="420" height="300"></canvas>
+<div class="info">
+<span class="status missing">✗ NOT IMPLEMENTED</span>
+<h3>🔁 Threefold Repetition</h3>
+<p>If the same board position occurs 3 times, a draw can be claimed. No position tracking exists yet.</p>
+</div>
+</div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// DRAWING HELPERS
+// ═══════════════════════════════════════════
+
+function bg(ctx,w,h){
+  var g=ctx.createLinearGradient(0,0,0,h);
+  g.addColorStop(0,'#0d1a2a');g.addColorStop(1,'#060d18');
+  ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+}
+
+// Draw an isometric-ish mini board
+function drawIsoBoard(ctx, ox, oy, cols, rows, cs, alpha, levelLabel, isActive) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  var bw = cols * cs, bh = rows * cs * 0.55; // squish vertically for perspective
+  // Board background
+  var skew = cs * 0.3;
+  ctx.beginPath();
+  ctx.moveTo(ox + skew, oy);
+  ctx.lineTo(ox + bw + skew, oy);
+  ctx.lineTo(ox + bw - skew, oy + bh);
+  ctx.lineTo(ox - skew, oy + bh);
+  ctx.closePath();
+  ctx.fillStyle = isActive ? '#0e2240' : '#0a1828';
+  ctx.fill();
+  ctx.strokeStyle = isActive ? 'rgba(100,180,255,0.6)' : 'rgba(60,100,160,0.3)';
+  ctx.lineWidth = isActive ? 2 : 1;
+  ctx.stroke();
+
+  // Grid cells
+  for (var r = 0; r < rows; r++) {
+    for (var c = 0; c < cols; c++) {
+      var dark = (r + c) % 2 === 1;
+      var t = r / rows; // 0 to 1 vertical position
+      var xOff = skew * (1 - 2 * t);
+      var cx = ox + c * cs + xOff;
+      var cy = oy + r * cs * 0.55;
+      var cw = cs, ch = cs * 0.55;
+
+      ctx.beginPath();
+      var topSkew = skew / rows;
+      ctx.moveTo(cx + topSkew, cy);
+      ctx.lineTo(cx + cw + topSkew, cy);
+      ctx.lineTo(cx + cw - topSkew, cy + ch);
+      ctx.lineTo(cx - topSkew, cy + ch);
+      ctx.closePath();
+
+      if (dark) {
+        ctx.fillStyle = isActive ? 'rgba(20,50,80,0.6)' : 'rgba(15,30,50,0.4)';
+        ctx.fill();
+      }
+      ctx.strokeStyle = isActive ? 'rgba(100,180,255,0.12)' : 'rgba(60,100,140,0.08)';
+      ctx.stroke();
+    }
+  }
+
+  // Level label
+  if (levelLabel) {
+    ctx.globalAlpha = 1;
+    ctx.font = 'bold 11px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = isActive ? '#4af' : '#3a5a7a';
+    ctx.fillText(levelLabel, ox - 8, oy + bh / 2);
+  }
+  ctx.restore();
+}
+
+// Get cell center on iso board
+function isoCell(ox, oy, col, row, cs, totalRows) {
+  var bh = cs * 0.55;
+  var skew = cs * 0.3;
+  var t = (row + 0.5) / totalRows;
+  var xOff = skew * (1 - 2 * t);
+  return {
+    x: ox + col * cs + cs / 2 + xOff,
+    y: oy + row * bh + bh / 2
+  };
+}
+
+function drawPiece(ctx, x, y, size, symbol, color) {
+  ctx.save();
+  ctx.font = 'bold ' + size + 'px serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  // Shadow
+  ctx.fillStyle = 'rgba(0,0,0,0.5)';
+  ctx.fillText(symbol, x + 1, y + 2);
+  ctx.fillStyle = color === 'white' ? '#f0f0f0' : '#2a2a2a';
+  ctx.strokeStyle = color === 'white' ? '#aaa' : '#000';
+  ctx.lineWidth = 1;
+  ctx.strokeText(symbol, x, y);
+  ctx.fillText(symbol, x, y);
+  ctx.restore();
+}
+
+function drawArrow(ctx, x1, y1, x2, y2, color, width, dashed) {
+  ctx.save();
+  if (dashed) ctx.setLineDash([4, 4]);
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2);
+  ctx.strokeStyle = color || '#4f4'; ctx.lineWidth = width || 2; ctx.stroke();
+  ctx.setLineDash([]);
+  var a = Math.atan2(y2 - y1, x2 - x1), s = 8;
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - s * Math.cos(a - 0.4), y2 - s * Math.sin(a - 0.4));
+  ctx.lineTo(x2 - s * Math.cos(a + 0.4), y2 - s * Math.sin(a + 0.4));
+  ctx.closePath(); ctx.fillStyle = color || '#4f4'; ctx.fill();
+  ctx.restore();
+}
+
+function drawDot(ctx, x, y, r, color) {
+  ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fillStyle = color || 'rgba(68,255,68,0.6)'; ctx.fill();
+}
+
+function label(ctx, x, y, text, size, color) {
+  ctx.font = 'bold ' + (size || 13) + 'px sans-serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillStyle = color || '#4af'; ctx.fillText(text, x, y);
+}
+
+function drawHighlight(ctx, x, y, cs, color) {
+  ctx.save();
+  ctx.globalAlpha = 0.35;
+  ctx.fillStyle = color || '#4f4';
+  ctx.beginPath();
+  ctx.arc(x, y, cs * 0.3, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawX(ctx, x, y, s, color) {
+  ctx.strokeStyle = color || '#f44'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(x - s, y - s); ctx.lineTo(x + s, y + s); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x + s, y - s); ctx.lineTo(x - s, y + s); ctx.stroke();
+}
+
+function drawBoard(ctx, ox, oy, cs, rows, cols, highlight) {
+  for (var r = 0; r < rows; r++) for (var c = 0; c < cols; c++) {
+    var x = ox + c * cs, y = oy + r * cs;
+    ctx.fillStyle = (r + c) % 2 === 1 ? '#1a3050' : '#2a4a6a';
+    ctx.fillRect(x, y, cs, cs);
+    ctx.strokeStyle = 'rgba(100,180,255,0.15)'; ctx.strokeRect(x, y, cs, cs);
+  }
+  if (highlight) highlight.forEach(function(h) {
+    ctx.fillStyle = h.color || 'rgba(68,255,68,0.3)';
+    ctx.fillRect(ox + h.c * cs, oy + h.r * cs, cs, cs);
+  });
+}
+
+// ═══════════════════════════════════════════
+// 3-LEVEL DIAGRAM HELPER
+// Draw 3 stacked iso boards: top (Level+1), middle (current), bottom (Level-1)
+// Returns {top, mid, bot} with ox, oy for each board
+// ═══════════════════════════════════════════
+function draw3Levels(ctx, w, h, cols, rows, cs) {
+  bg(ctx, w, h);
+  var bh = rows * cs * 0.55;
+  var gap = 18; // vertical gap between boards
+  var totalH = bh * 3 + gap * 2;
+  var startY = (h - totalH) / 2 + 5;
+  var ox = (w - cols * cs) / 2 + 15;
+
+  var topOy = startY;
+  var midOy = startY + bh + gap;
+  var botOy = startY + 2 * (bh + gap);
+
+  drawIsoBoard(ctx, ox, topOy, cols, rows, cs, 0.5, 'L+1', false);
+  drawIsoBoard(ctx, ox, midOy, cols, rows, cs, 1.0, 'L', true);
+  drawIsoBoard(ctx, ox, botOy, cols, rows, cs, 0.5, 'L-1', false);
+
+  // Dashed connectors between boards
+  ctx.save();
+  ctx.setLineDash([3, 5]);
+  ctx.strokeStyle = 'rgba(100,180,255,0.12)';
+  ctx.lineWidth = 1;
+  // Left side
+  ctx.beginPath(); ctx.moveTo(ox - cs * 0.3, topOy + bh); ctx.lineTo(ox - cs * 0.3, midOy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox - cs * 0.3, midOy + bh); ctx.lineTo(ox - cs * 0.3, botOy); ctx.stroke();
+  // Right side
+  var rx = ox + cols * cs + cs * 0.3;
+  ctx.beginPath(); ctx.moveTo(rx, topOy + bh); ctx.lineTo(rx, midOy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(rx, midOy + bh); ctx.lineTo(rx, botOy); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.restore();
+
+  return {
+    top: { ox: ox, oy: topOy },
+    mid: { ox: ox, oy: midOy },
+    bot: { ox: ox, oy: botOy },
+    cs: cs, rows: rows, cols: cols
+  };
+}
+
+function cellOf(boards, level, col, row) {
+  var b = level === 'top' ? boards.top : level === 'bot' ? boards.bot : boards.mid;
+  return isoCell(b.ox, b.oy, col, row, boards.cs, boards.rows);
+}
+
+// ═══════════════════════════════════════════
+// PAWN MOVEMENT (3D) — BOTH UP AND DOWN
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_pawn'), ctx = c.getContext('2d'), w = 420, h = 480;
+  var B = draw3Levels(ctx, w, h, 5, 5, 36);
+
+  // Piece on middle level
+  var piece = cellOf(B, 'mid', 2, 3);
+  drawPiece(ctx, piece.x, piece.y, 22, '♟', 'white');
+
+  // ── SAME LEVEL ──
+  // Forward (row-1)
+  var fwd = cellOf(B, 'mid', 2, 2);
+  drawHighlight(ctx, fwd.x, fwd.y, B.cs, '#4f4');
+  drawArrow(ctx, piece.x, piece.y - 5, fwd.x, fwd.y + 4, '#4f4', 2);
+
+  // Diagonal captures same level
+  var cL = cellOf(B, 'mid', 1, 2);
+  var cR = cellOf(B, 'mid', 3, 2);
+  drawHighlight(ctx, cL.x, cL.y, B.cs, '#f44');
+  drawHighlight(ctx, cR.x, cR.y, B.cs, '#f44');
+  drawArrow(ctx, piece.x, piece.y - 5, cL.x, cL.y + 4, '#f66', 1.5);
+  drawArrow(ctx, piece.x, piece.y - 5, cR.x, cR.y + 4, '#f66', 1.5);
+
+  // ── UPPER LEVEL (L+1) ──
+  var up = cellOf(B, 'top', 2, 3);
+  drawHighlight(ctx, up.x, up.y, B.cs, '#4af');
+  drawArrow(ctx, piece.x, piece.y - 8, up.x, up.y + 6, '#4af', 2.5);
+
+  // Diagonal captures upper level
+  var uL = cellOf(B, 'top', 1, 3);
+  var uR = cellOf(B, 'top', 3, 3);
+  drawHighlight(ctx, uL.x, uL.y, B.cs, '#f84');
+  drawHighlight(ctx, uR.x, uR.y, B.cs, '#f84');
+  drawArrow(ctx, piece.x, piece.y - 8, uL.x, uL.y + 6, '#f84', 1.5, true);
+  drawArrow(ctx, piece.x, piece.y - 8, uR.x, uR.y + 6, '#f84', 1.5, true);
+
+  // ── LOWER LEVEL (L-1) ──
+  var dn = cellOf(B, 'bot', 2, 3);
+  drawHighlight(ctx, dn.x, dn.y, B.cs, '#4af');
+  drawArrow(ctx, piece.x, piece.y + 8, dn.x, dn.y - 6, '#4af', 2.5);
+
+  // Diagonal captures lower level
+  var dL = cellOf(B, 'bot', 1, 3);
+  var dR = cellOf(B, 'bot', 3, 3);
+  drawHighlight(ctx, dL.x, dL.y, B.cs, '#f84');
+  drawHighlight(ctx, dR.x, dR.y, B.cs, '#f84');
+  drawArrow(ctx, piece.x, piece.y + 8, dL.x, dL.y - 6, '#f84', 1.5, true);
+  drawArrow(ctx, piece.x, piece.y + 8, dR.x, dR.y - 6, '#f84', 1.5, true);
+
+  // Legend
+  var lx = w - 95, ly = 20;
+  drawDot(ctx, lx, ly,    4, '#4f4');  label(ctx, lx+45, ly,    'Forward',       10, '#4f4');
+  drawDot(ctx, lx, ly+18, 4, '#f44');  label(ctx, lx+45, ly+18, 'Capture',        10, '#f66');
+  drawDot(ctx, lx, ly+36, 4, '#4af');  label(ctx, lx+45, ly+36, 'Level ↑ or ↓',  10, '#4af');
+  drawDot(ctx, lx, ly+54, 4, '#f84');  label(ctx, lx+45, ly+54, 'Level capture',  10, '#f84');
+
+  label(ctx, w/2, h - 12, 'Both colors move to either adjacent level', 11, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// PAWN DOUBLE MOVE
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_pawn2'), ctx = c.getContext('2d'), w = 420, h = 380;
+  var B = draw3Levels(ctx, w, h, 5, 5, 38);
+
+  // Pawn on starting row (row 4 = starting position x=1)
+  var piece = cellOf(B, 'mid', 2, 4);
+  drawPiece(ctx, piece.x, piece.y, 22, '♟', 'white');
+
+  // 1 square forward
+  var fwd1 = cellOf(B, 'mid', 2, 3);
+  drawHighlight(ctx, fwd1.x, fwd1.y, B.cs, '#4f4');
+  drawArrow(ctx, piece.x, piece.y - 6, fwd1.x, fwd1.y + 4, '#4f4', 2);
+
+  // 2 squares forward
+  var fwd2 = cellOf(B, 'mid', 2, 2);
+  drawHighlight(ctx, fwd2.x, fwd2.y, B.cs, '#4af');
+  drawArrow(ctx, piece.x, piece.y - 6, fwd2.x, fwd2.y + 4, '#4af', 2);
+
+  // Level movement still works
+  var lvlUp = cellOf(B, 'top', 2, 4);
+  drawHighlight(ctx, lvlUp.x, lvlUp.y, B.cs, '#4af');
+  drawArrow(ctx, piece.x, piece.y - 8, lvlUp.x, lvlUp.y + 6, '#4af', 2, true);
+
+  label(ctx, w - 55, 50, '1 square', 11, '#4f4');
+  drawDot(ctx, w - 100, 50, 4, '#4f4');
+  label(ctx, w - 55, 72, '2 squares', 11, '#4af');
+  label(ctx, w - 55, 86, '(first move)', 9, '#6a8a9a');
+  drawDot(ctx, w - 100, 72, 4, '#4af');
+  label(ctx, w - 55, 112, 'Level up', 11, '#4af');
+  drawDot(ctx, w - 100, 112, 4, '#4af');
+
+  label(ctx, w / 2, h - 12, 'Double move is same-level only', 11, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// ROOK MOVEMENT (3D)
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_rook'), ctx = c.getContext('2d'), w = 420, h = 380;
+  var B = draw3Levels(ctx, w, h, 6, 6, 34);
+
+  var piece = cellOf(B, 'mid', 3, 3);
+  drawPiece(ctx, piece.x, piece.y, 20, '♜', 'white');
+
+  // Same-level: horizontal (Z-axis) and vertical (X-axis)
+  for (var i = 0; i < 6; i++) {
+    if (i !== 3) {
+      var hz = cellOf(B, 'mid', i, 3);
+      drawDot(ctx, hz.x, hz.y, 5, 'rgba(68,255,68,0.6)');
+      var vt = cellOf(B, 'mid', 3, i);
+      drawDot(ctx, vt.x, vt.y, 5, 'rgba(68,255,68,0.6)');
+    }
+  }
+
+  // Cross-level: straight up (L+1)
+  var up = cellOf(B, 'top', 3, 3);
+  drawHighlight(ctx, up.x, up.y, B.cs, '#f84');
+  drawArrow(ctx, piece.x, piece.y - 8, up.x, up.y + 6, '#f84', 2.5);
+  // Continuation dots on upper level
+  drawDot(ctx, up.x, up.y, 6, 'rgba(255,136,68,0.6)');
+
+  // Cross-level: straight down (L-1)
+  var dn = cellOf(B, 'bot', 3, 3);
+  drawHighlight(ctx, dn.x, dn.y, B.cs, '#f84');
+  drawArrow(ctx, piece.x, piece.y + 8, dn.x, dn.y - 6, '#f84', 2.5);
+  drawDot(ctx, dn.x, dn.y, 6, 'rgba(255,136,68,0.6)');
+
+  // Legend
+  label(ctx, w - 48, 30, '±X, ±Z', 11, '#4f4');
+  drawDot(ctx, w - 90, 30, 4, '#4f4');
+  label(ctx, w - 48, 50, '±Level', 11, '#f84');
+  drawDot(ctx, w - 90, 50, 4, '#f84');
+  label(ctx, w - 48, 68, '6 dirs total', 10, '#7a8a9a');
+
+  label(ctx, w / 2, h - 12, 'Slides through levels like a 3D elevator', 11, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// BISHOP MOVEMENT (3D)
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_bishop'), ctx = c.getContext('2d'), w = 420, h = 380;
+  var B = draw3Levels(ctx, w, h, 6, 6, 34);
+
+  var piece = cellOf(B, 'mid', 3, 3);
+  drawPiece(ctx, piece.x, piece.y, 20, '♝', 'white');
+
+  // Same-level diagonals (X±Z)
+  for (var d = -3; d <= 3; d++) {
+    if (d === 0) continue;
+    var r1 = 3 + d, c1 = 3 + d;
+    if (r1 >= 0 && r1 < 6 && c1 >= 0 && c1 < 6) {
+      var p = cellOf(B, 'mid', c1, r1);
+      drawDot(ctx, p.x, p.y, 4, 'rgba(255,200,68,0.6)');
+    }
+    var r2 = 3 + d, c2 = 3 - d;
+    if (r2 >= 0 && r2 < 6 && c2 >= 0 && c2 < 6) {
+      var p2 = cellOf(B, 'mid', c2, r2);
+      drawDot(ctx, p2.x, p2.y, 4, 'rgba(255,200,68,0.6)');
+    }
+  }
+
+  // Cross-level diagonals: L+X and L-X (4 directions)
+  // Up level: (L+1, X+1, Z=0) and (L+1, X-1, Z=0)
+  var upFwd = cellOf(B, 'top', 3, 2); // L+1, X+1 → row-1
+  var upBck = cellOf(B, 'top', 3, 4); // L+1, X-1 → row+1
+  drawHighlight(ctx, upFwd.x, upFwd.y, B.cs, '#c4f');
+  drawHighlight(ctx, upBck.x, upBck.y, B.cs, '#c4f');
+  drawArrow(ctx, piece.x, piece.y - 8, upFwd.x, upFwd.y + 5, '#c4f', 2);
+  drawArrow(ctx, piece.x, piece.y - 8, upBck.x, upBck.y + 5, '#c4f', 2);
+
+  // Down level: (L-1, X+1, Z=0) and (L-1, X-1, Z=0)
+  var dnFwd = cellOf(B, 'bot', 3, 2);
+  var dnBck = cellOf(B, 'bot', 3, 4);
+  drawHighlight(ctx, dnFwd.x, dnFwd.y, B.cs, '#c4f');
+  drawHighlight(ctx, dnBck.x, dnBck.y, B.cs, '#c4f');
+  drawArrow(ctx, piece.x, piece.y + 8, dnFwd.x, dnFwd.y - 5, '#c4f', 2);
+  drawArrow(ctx, piece.x, piece.y + 8, dnBck.x, dnBck.y - 5, '#c4f', 2);
+
+  // Legend
+  drawDot(ctx, w - 90, 30, 4, 'rgba(255,200,68,0.8)');
+  label(ctx, w - 48, 30, 'X±Z diag', 10, '#fc4');
+  drawDot(ctx, w - 90, 50, 4, '#c4f');
+  label(ctx, w - 48, 50, 'L±X diag', 10, '#c4f');
+  label(ctx, w - 48, 68, '8 dirs total', 10, '#7a8a9a');
+
+  label(ctx, w / 2, h - 12, '4 same-level + 4 cross-level diagonals', 11, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// KNIGHT MOVEMENT (3D)
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_knight'), ctx = c.getContext('2d'), w = 420, h = 380;
+  var B = draw3Levels(ctx, w, h, 7, 7, 28);
+
+  var piece = cellOf(B, 'mid', 3, 3);
+  drawPiece(ctx, piece.x, piece.y, 18, '♞', 'white');
+
+  // Same-level L-shaped jumps (8 moves)
+  var sameLevel = [[2,1],[2,-1],[-2,1],[-2,-1],[1,2],[1,-2],[-1,2],[-1,-2]];
+  sameLevel.forEach(function(j) {
+    var r = 3 + j[0], cc = 3 + j[1];
+    if (r >= 0 && r < 7 && cc >= 0 && cc < 7) {
+      var p = cellOf(B, 'mid', cc, r);
+      drawDot(ctx, p.x, p.y, 5, 'rgba(68,200,255,0.7)');
+    }
+  });
+
+  // Cross-level jumps: ±1 level, ±1 X, ±1 Z (8 moves)
+  var crossLevel = [[1,1],[1,-1],[-1,1],[-1,-1]]; // dx, dz combinations for L+1
+  crossLevel.forEach(function(j) {
+    var r = 3 + j[0], cc = 3 + j[1];
+    if (r >= 0 && r < 7 && cc >= 0 && cc < 7) {
+      // Upper level
+      var pUp = cellOf(B, 'top', cc, r);
+      drawDot(ctx, pUp.x, pUp.y, 5, 'rgba(255,136,68,0.7)');
+      drawArrow(ctx, piece.x, piece.y - 6, pUp.x, pUp.y + 4, 'rgba(255,136,68,0.5)', 1.5, true);
+      // Lower level
+      var pDn = cellOf(B, 'bot', cc, r);
+      drawDot(ctx, pDn.x, pDn.y, 5, 'rgba(255,136,68,0.7)');
+      drawArrow(ctx, piece.x, piece.y + 6, pDn.x, pDn.y - 4, 'rgba(255,136,68,0.5)', 1.5, true);
+    }
+  });
+
+  // Legend
+  drawDot(ctx, w - 90, 25, 4, 'rgba(68,200,255,0.8)');
+  label(ctx, w - 48, 25, 'L-shaped', 10, '#4cf');
+  label(ctx, w - 48, 39, '(same lvl)', 9, '#4cf');
+  drawDot(ctx, w - 90, 58, 4, '#f84');
+  label(ctx, w - 48, 58, '3D jump', 10, '#f84');
+  label(ctx, w - 48, 72, '(cross lvl)', 9, '#f84');
+  label(ctx, w - 48, 92, '16 total', 10, '#7a8a9a');
+  label(ctx, w - 48, 106, 'Can jump!', 10, '#fff');
+
+  label(ctx, w / 2, h - 12, '8 same-level L-jumps + 8 cross-level diagonal jumps', 10, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// QUEEN MOVEMENT (3D)
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_queen'), ctx = c.getContext('2d'), w = 420, h = 380;
+  var B = draw3Levels(ctx, w, h, 6, 6, 34);
+
+  var piece = cellOf(B, 'mid', 3, 3);
+  drawPiece(ctx, piece.x, piece.y, 20, '♛', 'white');
+
+  // Same-level: straight + diagonals (rook + bishop)
+  for (var i = 0; i < 6; i++) {
+    if (i !== 3) {
+      // Straight
+      var hz = cellOf(B, 'mid', i, 3);
+      drawDot(ctx, hz.x, hz.y, 3, 'rgba(68,255,68,0.5)');
+      var vt = cellOf(B, 'mid', 3, i);
+      drawDot(ctx, vt.x, vt.y, 3, 'rgba(68,255,68,0.5)');
+    }
+  }
+  for (var d = -3; d <= 3; d++) {
+    if (d === 0) continue;
+    var r1 = 3 + d, c1 = 3 + d;
+    if (r1 >= 0 && r1 < 6 && c1 >= 0 && c1 < 6) drawDot(ctx, cellOf(B,'mid',c1,r1).x, cellOf(B,'mid',c1,r1).y, 3, 'rgba(255,200,68,0.5)');
+    var r2 = 3 + d, c2 = 3 - d;
+    if (r2 >= 0 && r2 < 6 && c2 >= 0 && c2 < 6) drawDot(ctx, cellOf(B,'mid',c2,r2).x, cellOf(B,'mid',c2,r2).y, 3, 'rgba(255,200,68,0.5)');
+  }
+
+  // Cross-level: straight up/down (like rook)
+  var up = cellOf(B, 'top', 3, 3);
+  var dn = cellOf(B, 'bot', 3, 3);
+  drawDot(ctx, up.x, up.y, 5, 'rgba(68,255,68,0.6)');
+  drawDot(ctx, dn.x, dn.y, 5, 'rgba(68,255,68,0.6)');
+  drawArrow(ctx, piece.x, piece.y - 8, up.x, up.y + 5, '#4f4', 2);
+  drawArrow(ctx, piece.x, piece.y + 8, dn.x, dn.y - 5, '#4f4', 2);
+
+  // Cross-level: L±X diagonals (like bishop)
+  var dirs = [[2,3],[4,3]]; // forward/backward on X
+  dirs.forEach(function(d) {
+    var pUp = cellOf(B, 'top', d[1], d[0]);
+    drawDot(ctx, pUp.x, pUp.y, 4, 'rgba(200,68,255,0.6)');
+    drawArrow(ctx, piece.x, piece.y - 8, pUp.x, pUp.y + 5, '#c4f', 1.5, true);
+    var pDn = cellOf(B, 'bot', d[1], d[0]);
+    drawDot(ctx, pDn.x, pDn.y, 4, 'rgba(200,68,255,0.6)');
+    drawArrow(ctx, piece.x, piece.y + 8, pDn.x, pDn.y - 5, '#c4f', 1.5, true);
+  });
+
+  // Cross-level: L±Z diagonals
+  var zDirs = [[3,2],[3,4]];
+  zDirs.forEach(function(d) {
+    var pUp = cellOf(B, 'top', d[1], d[0]);
+    drawDot(ctx, pUp.x, pUp.y, 4, 'rgba(255,68,200,0.6)');
+    drawArrow(ctx, piece.x, piece.y - 8, pUp.x, pUp.y + 5, '#f4c', 1.5, true);
+    var pDn = cellOf(B, 'bot', d[1], d[0]);
+    drawDot(ctx, pDn.x, pDn.y, 4, 'rgba(255,68,200,0.6)');
+    drawArrow(ctx, piece.x, piece.y + 8, pDn.x, pDn.y - 5, '#f4c', 1.5, true);
+  });
+
+  // Legend
+  drawDot(ctx, w - 90, 22, 3, '#4f4');
+  label(ctx, w - 48, 22, 'Straight', 9, '#4f4');
+  drawDot(ctx, w - 90, 38, 3, '#fc4');
+  label(ctx, w - 48, 38, 'Diagonal', 9, '#fc4');
+  drawDot(ctx, w - 90, 54, 3, '#c4f');
+  label(ctx, w - 48, 54, 'L±X', 9, '#c4f');
+  drawDot(ctx, w - 90, 70, 3, '#f4c');
+  label(ctx, w - 48, 70, 'L±Z', 9, '#f4c');
+  label(ctx, w - 48, 88, '18 dirs!', 10, '#fff');
+
+  label(ctx, w / 2, h - 12, 'Rook + Bishop + cross-level diagonals = 18 directions', 10, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// KING MOVEMENT (3D)
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_king'), ctx = c.getContext('2d'), w = 420, h = 380;
+  var B = draw3Levels(ctx, w, h, 5, 5, 38);
+
+  var piece = cellOf(B, 'mid', 2, 2);
+  drawPiece(ctx, piece.x, piece.y, 22, '♚', 'white');
+
+  // Same-level: all 8 surrounding cells
+  for (var dr = -1; dr <= 1; dr++) {
+    for (var dc = -1; dc <= 1; dc++) {
+      if (dr === 0 && dc === 0) continue;
+      var r = 2 + dr, cc = 2 + dc;
+      if (r >= 0 && r < 5 && cc >= 0 && cc < 5) {
+        var p = cellOf(B, 'mid', cc, r);
+        drawDot(ctx, p.x, p.y, 5, 'rgba(68,255,68,0.55)');
+      }
+    }
+  }
+
+  // Upper level: all 9 cells (same position + 8 surrounding)
+  for (var dr = -1; dr <= 1; dr++) {
+    for (var dc = -1; dc <= 1; dc++) {
+      var r = 2 + dr, cc = 2 + dc;
+      if (r >= 0 && r < 5 && cc >= 0 && cc < 5) {
+        var p = cellOf(B, 'top', cc, r);
+        drawDot(ctx, p.x, p.y, 4, 'rgba(68,170,255,0.55)');
+      }
+    }
+  }
+  // Center arrow up
+  var upCenter = cellOf(B, 'top', 2, 2);
+  drawArrow(ctx, piece.x, piece.y - 8, upCenter.x, upCenter.y + 5, '#4af', 2);
+
+  // Lower level: all 9 cells
+  for (var dr = -1; dr <= 1; dr++) {
+    for (var dc = -1; dc <= 1; dc++) {
+      var r = 2 + dr, cc = 2 + dc;
+      if (r >= 0 && r < 5 && cc >= 0 && cc < 5) {
+        var p = cellOf(B, 'bot', cc, r);
+        drawDot(ctx, p.x, p.y, 4, 'rgba(68,170,255,0.55)');
+      }
+    }
+  }
+  // Center arrow down
+  var dnCenter = cellOf(B, 'bot', 2, 2);
+  drawArrow(ctx, piece.x, piece.y + 8, dnCenter.x, dnCenter.y - 5, '#4af', 2);
+
+  // Legend
+  drawDot(ctx, w - 90, 30, 4, '#4f4');
+  label(ctx, w - 48, 30, 'Same lvl', 10, '#4f4');
+  label(ctx, w - 48, 44, '(8 cells)', 9, '#4f4');
+  drawDot(ctx, w - 90, 63, 4, '#4af');
+  label(ctx, w - 48, 63, 'Up/Down', 10, '#4af');
+  label(ctx, w - 48, 77, '(9+9 cells)', 9, '#4af');
+  label(ctx, w - 48, 100, '26 total!', 11, '#fff');
+
+  label(ctx, w / 2, h - 12, '3×3×3 cube = 26 possible moves (1 square any direction)', 10, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// STANDARD CAPTURES
+// ═══════════════════════════════════════════
+// CAPTURES ACROSS LEVELS (3D)
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_capture'), ctx = c.getContext('2d'), w = 420, h = 380;
+  var B = draw3Levels(ctx, w, h, 6, 5, 34);
+
+  // Rook on middle level
+  var rook = cellOf(B, 'mid', 1, 2);
+  drawPiece(ctx, rook.x, rook.y, 20, '♜', 'white');
+
+  // Enemy on same level — same-level capture
+  var enemy1 = cellOf(B, 'mid', 4, 2);
+  drawHighlight(ctx, enemy1.x, enemy1.y, B.cs, '#f44');
+  drawPiece(ctx, enemy1.x, enemy1.y, 18, '♞', 'black');
+  drawArrow(ctx, rook.x + 12, rook.y, enemy1.x - 8, enemy1.y, '#4f4', 2);
+  label(ctx, (rook.x + enemy1.x) / 2, rook.y - 14, 'same level', 9, '#4f4');
+
+  // Enemy on upper level — cross-level rook capture
+  var enemy2 = cellOf(B, 'top', 1, 2);
+  drawHighlight(ctx, enemy2.x, enemy2.y, B.cs, '#f44');
+  drawPiece(ctx, enemy2.x, enemy2.y, 18, '♝', 'black');
+  drawArrow(ctx, rook.x, rook.y - 8, enemy2.x, enemy2.y + 6, '#f84', 2.5);
+  label(ctx, enemy2.x + 30, (rook.y + enemy2.y) / 2, 'cross-level', 9, '#f84');
+  label(ctx, enemy2.x + 30, (rook.y + enemy2.y) / 2 + 13, 'capture!', 9, '#f84');
+
+  // Bishop on mid — cross-level diagonal capture on lower board
+  var bish = cellOf(B, 'mid', 4, 4);
+  drawPiece(ctx, bish.x, bish.y, 20, '♝', 'white');
+  var enemy3 = cellOf(B, 'bot', 4, 3);
+  drawHighlight(ctx, enemy3.x, enemy3.y, B.cs, '#f44');
+  drawPiece(ctx, enemy3.x, enemy3.y, 18, '♟', 'black');
+  drawArrow(ctx, bish.x, bish.y + 8, enemy3.x, enemy3.y - 5, '#c4f', 2, true);
+  label(ctx, enemy3.x - 35, (bish.y + enemy3.y) / 2, 'diag', 9, '#c4f');
+  label(ctx, enemy3.x - 35, (bish.y + enemy3.y) / 2 + 13, 'capture', 9, '#c4f');
+
+  // Captured pieces panel
+  ctx.fillStyle = 'rgba(255,255,255,0.04)';
+  ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+  ctx.fillRect(w - 70, 20, 60, 90); ctx.strokeRect(w - 70, 20, 60, 90);
+  label(ctx, w - 40, 14, 'Captured', 9, '#888');
+  drawPiece(ctx, w - 55, 45, 16, '♟', 'black');
+  drawPiece(ctx, w - 25, 45, 16, '♝', 'black');
+  drawPiece(ctx, w - 55, 70, 16, '♞', 'black');
+  drawPiece(ctx, w - 25, 70, 16, '♜', 'black');
+  label(ctx, w - 40, 100, 'tracked', 9, '#6a7a8a');
+
+  label(ctx, w / 2, h - 12, 'Captures work the same on every level', 11, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// PAWN PROMOTION — FIXED COL 7 / COL 0
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_pawnpromo'), ctx = c.getContext('2d'), w = 420, h = 320;
+  bg(ctx, w, h);
+
+  var cs = 34, cols = 8, rows = 3;
+  var ox = (w - cols * cs) / 2;
+  var oy = 30;
+
+  // Draw 8x3 board
+  for (var r = 0; r < rows; r++) for (var cc = 0; cc < cols; cc++) {
+    ctx.fillStyle = (r + cc) % 2 === 1 ? '#1a3050' : '#2a4a6a';
+    ctx.fillRect(ox + cc * cs, oy + r * cs, cs, cs);
+    ctx.strokeStyle = 'rgba(100,180,255,0.15)'; ctx.strokeRect(ox + cc * cs, oy + r * cs, cs, cs);
+  }
+
+  // Column number labels
+  for (var cc = 0; cc < cols; cc++) {
+    label(ctx, ox + cc * cs + cs / 2, oy - 10, cc, 10, cc === 0 ? '#f84' : cc === 7 ? '#ff4' : '#4a6a8a');
+  }
+
+  // Highlight white promotion (col 7) — yellow
+  ctx.fillStyle = 'rgba(255,220,68,0.25)';
+  ctx.fillRect(ox + 7 * cs, oy, cs, rows * cs);
+  label(ctx, ox + 7 * cs + cs / 2, oy - 22, 'WHITE', 9, '#ff4');
+
+  // Highlight black promotion (col 0) — orange
+  ctx.fillStyle = 'rgba(255,120,68,0.2)';
+  ctx.fillRect(ox + 0 * cs, oy, cs, rows * cs);
+  label(ctx, ox + 0 * cs + cs / 2, oy - 22, 'BLACK', 9, '#f84');
+
+  // White pawn at col 6, row 2 → promotes at col 7
+  var wPx = ox + 6 * cs + cs / 2, wPy = oy + 2 * cs + cs / 2;
+  drawPiece(ctx, wPx, wPy, cs * 0.7, '♟', 'white');
+  drawArrow(ctx, wPx + cs * 0.4, wPy, ox + 7 * cs + cs * 0.1, wPy, '#ff4', 2);
+  drawPiece(ctx, ox + 7 * cs + cs / 2, oy + 2 * cs + cs / 2, cs * 0.8, '♛', 'white');
+
+  // Black pawn at col 1, row 0 → promotes at col 0
+  var bPx = ox + 1 * cs + cs / 2, bPy = oy + 0 * cs + cs / 2;
+  drawPiece(ctx, bPx, bPy, cs * 0.7, '♟', 'black');
+  drawArrow(ctx, bPx - cs * 0.4, bPy, ox + 0 * cs + cs * 0.9, bPy, '#f84', 2);
+  drawPiece(ctx, ox + 0 * cs + cs / 2, oy + 0 * cs + cs / 2, cs * 0.8, '♛', 'black');
+
+  // Choice panel
+  ctx.fillStyle = 'rgba(20,30,50,0.85)';
+  ctx.strokeStyle = '#4af'; ctx.lineWidth = 1.5;
+  var px = ox + 2 * cs, py2 = oy + rows * cs + 14;
+  ctx.fillRect(px, py2, cols * cs - 2 * cs - 10, 70);
+  ctx.strokeRect(px, py2, cols * cs - 2 * cs - 10, 70);
+  label(ctx, w / 2, py2 + 14, 'Player chooses:', 11, '#aaa');
+  [['♛', 'Queen'], ['♜', 'Rook'], ['♝', 'Bishop'], ['♞', 'Knight']].forEach(function(ch, i) {
+    var cx2 = px + 20 + i * 46;
+    drawPiece(ctx, cx2, py2 + 42, 20, ch[0], 'white');
+    label(ctx, cx2, py2 + 60, ch[1], 8, '#888');
+  });
+
+  label(ctx, w / 2, h - 8, 'Always col 7 (white) or col 0 (black) — on any level', 11, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// EN PASSANT (NOT IMPLEMENTED — ANY LEVEL)
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_enpassant'), ctx = c.getContext('2d'), w = 420, h = 380;
+  var B = draw3Levels(ctx, w, h, 5, 5, 38);
+
+  // Two pawns side by side on middle level
+  var wPawn = cellOf(B, 'mid', 2, 2);
+  var bPawn = cellOf(B, 'mid', 3, 2);
+  drawPiece(ctx, wPawn.x, wPawn.y, 22, '♟', 'white');
+  drawPiece(ctx, bPawn.x, bPawn.y, 22, '♟', 'black');
+
+  // Ghost of black pawn 2 squares back (where it started)
+  var ghostPos = cellOf(B, 'mid', 3, 4);
+  ctx.globalAlpha = 0.25;
+  drawPiece(ctx, ghostPos.x, ghostPos.y, 22, '♟', 'black');
+  ctx.globalAlpha = 1;
+  drawArrow(ctx, ghostPos.x, ghostPos.y - 6, bPawn.x, bPawn.y + 6, '#888', 1.5, true);
+
+  // Where en passant WOULD land (not implemented)
+  var epTarget = cellOf(B, 'mid', 2, 1);
+  drawHighlight(ctx, epTarget.x, epTarget.y, B.cs, '#f44');
+  drawArrow(ctx, wPawn.x, wPawn.y - 6, epTarget.x, epTarget.y + 6, '#f44', 1.5, true);
+  drawX(ctx, epTarget.x, epTarget.y, 8, '#f44');
+
+  // Same for upper level (also not implemented)
+  var upWPawn = cellOf(B, 'top', 2, 2);
+  var upBPawn = cellOf(B, 'top', 3, 2);
+  ctx.globalAlpha = 0.4;
+  drawPiece(ctx, upWPawn.x, upWPawn.y, 18, '♟', 'white');
+  drawPiece(ctx, upBPawn.x, upBPawn.y, 18, '♟', 'black');
+  ctx.globalAlpha = 1;
+  var upEP = cellOf(B, 'top', 2, 1);
+  drawX(ctx, upEP.x, upEP.y, 6, '#f44');
+
+  label(ctx, w - 55, 25, '✗ Missing', 11, '#f44');
+  label(ctx, w - 55, 42, 'ALL levels', 10, '#f44');
+
+  label(ctx, w / 2, h - 12, 'En passant not implemented on any level', 11, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// CHECK DETECTION (3D — CROSS-LEVEL)
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_check'), ctx = c.getContext('2d'), w = 420, h = 380;
+  var B = draw3Levels(ctx, w, h, 5, 5, 36);
+
+  // King on middle level, under attack from rook on lower level
+  var king = cellOf(B, 'mid', 3, 2);
+  var rook = cellOf(B, 'bot', 3, 2);
+
+  // King highlight red
+  ctx.save();
+  ctx.globalAlpha = 0.4; ctx.fillStyle = '#f44';
+  ctx.beginPath(); ctx.arc(king.x, king.y, B.cs * 0.4, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+  ctx.save();
+  ctx.shadowColor = '#f44'; ctx.shadowBlur = 18;
+  ctx.strokeStyle = '#f44'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.arc(king.x, king.y, B.cs * 0.42, 0, Math.PI*2); ctx.stroke();
+  ctx.restore();
+
+  drawPiece(ctx, king.x, king.y, 22, '♚', 'black');
+  drawPiece(ctx, rook.x, rook.y, 20, '♜', 'white');
+
+  // Attack arrow from rook (lower level) straight up to king (mid level)
+  drawArrow(ctx, rook.x, rook.y - 8, king.x, king.y + 8, '#f44', 2.5);
+
+  // Also show a bishop on upper level threatening diagonally
+  var bish = cellOf(B, 'top', 1, 2);
+  drawPiece(ctx, bish.x, bish.y, 18, '♝', 'white');
+  drawArrow(ctx, bish.x, bish.y + 6, king.x, king.y - 6, '#f84', 1.5, true);
+
+  // CHECK label
+  label(ctx, king.x, king.y - B.cs * 0.8, '⚡ CHECK!', 14, '#f44');
+
+  // Mode note
+  label(ctx, w/2, h - 28, '7-level mode: scan 7 levels', 10, '#6a8aaa');
+  label(ctx, w/2, h - 14, '15-level mode: scan 15 levels', 10, '#6a8aaa');
+})();
+
+// ═══════════════════════════════════════════
+// CHECKMATE (3D — NO ESCAPE ON ANY LEVEL)
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_checkmate'), ctx = c.getContext('2d'), w = 420, h = 380;
+  var B = draw3Levels(ctx, w, h, 5, 5, 36);
+
+  // King on middle level, corner
+  var king = cellOf(B, 'mid', 4, 0);
+  drawHighlight(ctx, king.x, king.y, B.cs, '#f44');
+  drawPiece(ctx, king.x, king.y, 22, '♚', 'black');
+
+  // Attacker: rook on same level
+  var rook = cellOf(B, 'mid', 0, 0);
+  drawPiece(ctx, rook.x, rook.y, 18, '♜', 'white');
+  drawArrow(ctx, rook.x + 10, rook.y, king.x - 8, king.y, '#f44', 2);
+
+  // Queen covering escape squares on same level
+  var queen = cellOf(B, 'mid', 3, 2);
+  drawPiece(ctx, queen.x, queen.y, 18, '♛', 'white');
+
+  // X on all same-level escape squares
+  drawX(ctx, cellOf(B,'mid',3,0).x, cellOf(B,'mid',3,0).y, 7, '#f44');
+  drawX(ctx, cellOf(B,'mid',4,1).x, cellOf(B,'mid',4,1).y, 7, '#f44');
+  drawX(ctx, cellOf(B,'mid',3,1).x, cellOf(B,'mid',3,1).y, 7, '#f44');
+
+  // X on upper level escape (blocked by piece there)
+  var upKing = cellOf(B, 'top', 4, 0);
+  drawPiece(ctx, upKing.x, upKing.y, 16, '♜', 'white'); // blocking piece
+  drawX(ctx, upKing.x, upKing.y, 7, '#f44');
+
+  // X on lower level too
+  var dnKing = cellOf(B, 'bot', 4, 0);
+  drawX(ctx, dnKing.x, dnKing.y, 7, '#f44');
+  label(ctx, dnKing.x + 28, dnKing.y, 'blocked', 8, '#f44');
+
+  label(ctx, w/2, 18, '☠ CHECKMATE!', 18, '#f44');
+  label(ctx, w/2, h - 14, 'No escape on same level, L+1, or L-1 = checkmate', 10, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// STALEMATE (3D — ALL LEVELS CHECKED)
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_stalemate'), ctx = c.getContext('2d'), w = 420, h = 380;
+  var B = draw3Levels(ctx, w, h, 5, 5, 36);
+
+  // King on middle level, corner, NOT in check
+  var king = cellOf(B, 'mid', 4, 0);
+  drawHighlight(ctx, king.x, king.y, B.cs, 'rgba(255,220,68,0.25)');
+  drawPiece(ctx, king.x, king.y, 22, '♚', 'black');
+
+  // Enemy queen covering all same-level moves but NOT attacking king
+  var queen = cellOf(B, 'mid', 2, 2);
+  drawPiece(ctx, queen.x, queen.y, 18, '♛', 'white');
+
+  // X on same-level escapes (covered by queen)
+  drawX(ctx, cellOf(B,'mid',3,0).x, cellOf(B,'mid',3,0).y, 7, '#f84');
+  drawX(ctx, cellOf(B,'mid',4,1).x, cellOf(B,'mid',4,1).y, 7, '#f84');
+  drawX(ctx, cellOf(B,'mid',3,1).x, cellOf(B,'mid',3,1).y, 7, '#f84');
+
+  // X on upper level (too narrow / all blocked)
+  var upKing = cellOf(B, 'top', 4, 0);
+  drawX(ctx, upKing.x, upKing.y, 7, '#f84');
+  drawX(ctx, cellOf(B,'top',3,0).x, cellOf(B,'top',3,0).y, 7, '#f84');
+
+  // X on lower level
+  var dnKing = cellOf(B, 'bot', 4, 0);
+  drawX(ctx, dnKing.x, dnKing.y, 7, '#f84');
+  drawX(ctx, cellOf(B,'bot',3,0).x, cellOf(B,'bot',3,0).y, 7, '#f84');
+
+  // NOT in check indicator
+  label(ctx, king.x - 38, king.y - B.cs * 0.6, '✓ Not in check', 9, '#4f4');
+
+  label(ctx, w/2, 18, '🤝 STALEMATE — DRAW', 16, '#ff4');
+  label(ctx, w/2, h - 28, 'No moves anywhere across all levels', 10, '#7a8a9a');
+  label(ctx, w/2, h - 14, 'Extra levels make stalemate rarer than standard chess', 10, '#6a8aaa');
+})();
+
+// ═══════════════════════════════════════════
+// ILLEGAL MOVE PREVENTION — FIXED
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_nocheck'), ctx = c.getContext('2d'), w = 420, h = 300;
+  bg(ctx, w, h);
+  var cs = 40, ox = 80, oy = 60;
+  drawBoard(ctx, ox, oy, cs, 5, 5);
+  drawPiece(ctx, ox + 2 * cs + cs / 2, oy + 2 * cs + cs / 2, 28, '♚', 'white');
+  drawPiece(ctx, ox + 4 * cs + cs / 2, oy + 1 * cs + cs / 2, 24, '♜', 'black');
+
+  // Rook attack line
+  ctx.save();
+  ctx.setLineDash([5, 5]); ctx.strokeStyle = 'rgba(255,68,68,0.4)'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(ox + cs / 2, oy + 1 * cs + cs / 2); ctx.lineTo(ox + 4 * cs, oy + 1 * cs + cs / 2); ctx.stroke();
+  ctx.restore();
+
+  // The illegal square — blocked/greyed out, not shown as valid
+  ctx.fillStyle = 'rgba(255,40,40,0.15)'; ctx.fillRect(ox + 3 * cs, oy + 1 * cs, cs, cs);
+  drawX(ctx, ox + 3 * cs + cs / 2, oy + 1 * cs + cs / 2, 10, '#f44');
+
+  // Legal moves shown in green — the king can only go to safe squares
+  drawDot(ctx, ox + 1 * cs + cs / 2, oy + 1 * cs + cs / 2, 8, 'rgba(68,255,68,0.55)');
+  drawDot(ctx, ox + 1 * cs + cs / 2, oy + 2 * cs + cs / 2, 8, 'rgba(68,255,68,0.55)');
+  drawDot(ctx, ox + 2 * cs + cs / 2, oy + 3 * cs + cs / 2, 8, 'rgba(68,255,68,0.55)');
+  drawDot(ctx, ox + 3 * cs + cs / 2, oy + 2 * cs + cs / 2, 8, 'rgba(68,255,68,0.55)');
+  drawDot(ctx, ox + 3 * cs + cs / 2, oy + 3 * cs + cs / 2, 8, 'rgba(68,255,68,0.55)');
+
+  label(ctx, 210, oy - 10, '✓ FIXED: Only safe moves shown', 14, '#4f4');
+  label(ctx, 210, h - 28, 'getLegalMoves() simulates each move', 10, '#5a8a5a');
+  label(ctx, 210, h - 14, 'and filters out any that leave king in check', 10, '#5a8a5a');
+})();
+
+// ═══════════════════════════════════════════
+// CASTLING (NOT IMPLEMENTED)
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_castling'), ctx = c.getContext('2d'), w = 420, h = 300;
+  bg(ctx, w, h);
+  var cs = 36, ox = 50, oy = 100;
+  drawBoard(ctx, ox, oy, cs, 2, 8);
+  drawPiece(ctx, ox + 4 * cs + cs / 2, oy + cs / 2, 24, '♚', 'white');
+  drawPiece(ctx, ox + 7 * cs + cs / 2, oy + cs / 2, 22, '♜', 'white');
+  ctx.globalAlpha = 0.3;
+  drawPiece(ctx, ox + 6 * cs + cs / 2, oy + 1 * cs + cs / 2, 24, '♚', 'white');
+  drawPiece(ctx, ox + 5 * cs + cs / 2, oy + 1 * cs + cs / 2, 22, '♜', 'white');
+  ctx.globalAlpha = 1;
+  drawArrow(ctx, ox + 4 * cs + cs / 2, oy + cs / 2, ox + 6 * cs + cs / 2, oy + 1 * cs + cs / 2, '#888', 1.5);
+  drawArrow(ctx, ox + 7 * cs + cs / 2, oy + cs / 2, ox + 5 * cs + cs / 2, oy + 1 * cs + cs / 2, '#888', 1.5);
+  label(ctx, 210, 60, '🏰 Castling', 20, '#888');
+  label(ctx, 210, 80, 'King + Rook swap', 13, '#666');
+  label(ctx, 210, h - 15, 'Not yet in the game — may be added later', 11, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// TURN SYSTEM
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_turns'), ctx = c.getContext('2d'), w = 420, h = 300;
+  bg(ctx, w, h);
+  ctx.beginPath(); ctx.arc(140, 120, 45, 0, Math.PI * 2);
+  ctx.fillStyle = '#e0e0e0'; ctx.fill();
+  ctx.strokeStyle = '#4af'; ctx.lineWidth = 3; ctx.stroke();
+  drawPiece(ctx, 140, 120, 36, '♔', 'white');
+  label(ctx, 140, 180, 'WHITE', 14, '#fff');
+  label(ctx, 140, 198, 'moves first', 11, '#888');
+  drawArrow(ctx, 190, 120, 230, 120, '#4af', 3);
+  drawArrow(ctx, 230, 140, 190, 140, '#4af', 3);
+  label(ctx, 210, 165, 'alternate', 10, '#4af');
+  ctx.beginPath(); ctx.arc(280, 120, 45, 0, Math.PI * 2);
+  ctx.fillStyle = '#333'; ctx.fill();
+  ctx.strokeStyle = '#4af'; ctx.lineWidth = 3; ctx.stroke();
+  drawPiece(ctx, 280, 120, 36, '♚', 'black');
+  label(ctx, 280, 180, 'BLACK', 14, '#ccc');
+  label(ctx, 280, 198, 'moves second', 11, '#888');
+  label(ctx, 210, h - 20, "Players take turns — can't move opponent's pieces", 11, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// MULTI-LEVEL BOARD
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_levels'), ctx = c.getContext('2d'), w = 420, h = 380;
+  bg(ctx, w, h);
+  // Draw stacked rhombus boards
+  var levels = [2, 3, 4, 5, 6, 7, 8, 8, 8, 7, 6, 5, 4, 3, 2];
+  var baseY = 340, spacing = 20, cellW = 22;
+  var maxW = 8 * cellW;
+  var centerX = 160;
+
+  for (var i = 0; i < levels.length; i++) {
+    var lw = levels[i] * cellW, lh = 12;
+    var x = centerX - lw / 2, y = baseY - i * spacing;
+    var isMid = (i === 7);
+    var alpha = 0.25 + 0.6 * (1 - Math.abs(i / 14 - 0.5) * 2);
+
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    var g = ctx.createLinearGradient(x, y, x + lw, y);
+    g.addColorStop(0, isMid ? '#1a4a7a' : '#0e2a4a');
+    g.addColorStop(0.5, isMid ? '#2a5a9a' : '#1a3a5a');
+    g.addColorStop(1, isMid ? '#1a4a7a' : '#0e2a4a');
+    ctx.fillStyle = g;
+    ctx.fillRect(x, y, lw, lh);
+    ctx.strokeStyle = isMid ? 'rgba(100,200,255,0.7)' : 'rgba(80,140,200,0.3)';
+    ctx.lineWidth = isMid ? 2 : 1;
+    ctx.strokeRect(x, y, lw, lh);
+    ctx.restore();
+
+    // Level labels
+    if (i === 0 || i === 7 || i === 14) {
+      ctx.font = 'bold 10px sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillStyle = isMid ? '#4af' : '#5a7a9a';
+      ctx.fillText('L' + (i + 1) + (isMid ? ' (8×8)' : ' (' + levels[i] + '×8)'), x + lw + 10, y + lh / 2 + 3);
+    }
+  }
+
+  // Arrows showing piece movement between levels
+  var midY = baseY - 7 * spacing;
+  drawArrow(ctx, centerX + maxW / 2 + 50, midY + 6, centerX + maxW / 2 + 50, midY - 3 * spacing, '#f84', 2);
+  drawArrow(ctx, centerX + maxW / 2 + 50, midY + 6, centerX + maxW / 2 + 50, midY + 3 * spacing, '#f84', 2);
+  label(ctx, centerX + maxW / 2 + 75, midY, '↕ Pieces', 10, '#f84');
+  label(ctx, centerX + maxW / 2 + 75, midY + 14, 'move up', 10, '#f84');
+  label(ctx, centerX + maxW / 2 + 75, midY + 28, '& down', 10, '#f84');
+
+  label(ctx, 210, 20, 'Rhombus Shape: widest at center', 13, '#4af');
+  label(ctx, 210, h - 12, '15 or 7 levels — toggle in-game', 11, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// 50-MOVE RULE (NOT IMPLEMENTED)
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_50move'), ctx = c.getContext('2d'), w = 420, h = 300;
+  bg(ctx, w, h);
+  label(ctx, 210, 130, '50', 60, '#555');
+  label(ctx, 210, 180, 'moves without capture', 14, '#666');
+  label(ctx, 210, 200, 'or pawn advance', 14, '#666');
+  label(ctx, 210, 240, '= claim a DRAW', 16, '#888');
+  label(ctx, 210, h - 15, 'Not tracked — games can go on indefinitely', 11, '#7a8a9a');
+})();
+
+// ═══════════════════════════════════════════
+// THREEFOLD REPETITION (NOT IMPLEMENTED)
+// ═══════════════════════════════════════════
+(function() {
+  var c = document.getElementById('c_threefold'), ctx = c.getContext('2d'), w = 420, h = 300;
+  bg(ctx, w, h);
+  for (var b = 0; b < 3; b++) {
+    var bx = 65 + b * 110, by = 80;
+    ctx.fillStyle = 'rgba(30,50,80,0.4)';
+    ctx.fillRect(bx, by, 80, 80);
+    ctx.strokeStyle = 'rgba(100,180,255,0.2)'; ctx.strokeRect(bx, by, 80, 80);
+    drawPiece(ctx, bx + 40, by + 40, 20, '♚', 'white');
+    label(ctx, bx + 40, by - 10, '#' + (b + 1), 12, '#888');
+    if (b < 2) label(ctx, bx + 95, by + 40, '=', 16, '#666');
+  }
+  label(ctx, 210, 200, 'Same position × 3', 16, '#888');
+  label(ctx, 210, 225, '= claim a DRAW', 14, '#666');
+  label(ctx, 210, h - 15, 'No position tracking — games can loop forever', 11, '#7a8a9a');
+})();
+
+</script>
+</body>
+</html>

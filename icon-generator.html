@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head><title>4D Rhombus Chess - Icon Generator</title></head>
+<body style="background:#222;display:flex;flex-direction:column;align-items:center;gap:20px;padding:40px;font-family:sans-serif;color:#fff;">
+<h2>4D Rhombus Chess — App Icon Generator</h2>
+<p>Right-click each icon → "Save image as..." to download</p>
+
+<div style="display:flex;gap:30px;flex-wrap:wrap;justify-content:center;">
+  <div style="text-align:center;">
+    <canvas id="c1024" width="1024" height="1024"></canvas>
+    <p>1024x1024 (Play Store)</p>
+  </div>
+  <div style="text-align:center;">
+    <canvas id="c512" width="512" height="512"></canvas>
+    <p>512x512</p>
+  </div>
+  <div style="text-align:center;">
+    <canvas id="c192" width="192" height="192"></canvas>
+    <p>192x192 (Android)</p>
+  </div>
+  <div style="text-align:center;">
+    <canvas id="c144" width="144" height="144"></canvas>
+    <p>144x144</p>
+  </div>
+  <div style="text-align:center;">
+    <canvas id="c96" width="96" height="96"></canvas>
+    <p>96x96</p>
+  </div>
+  <div style="text-align:center;">
+    <canvas id="c48" width="48" height="48"></canvas>
+    <p>48x48</p>
+  </div>
+</div>
+
+<h3 style="margin-top:40px;">Splash Screen</h3>
+<div style="text-align:center;">
+  <canvas id="splash" width="2732" height="2732"></canvas>
+  <p>2732x2732 (Universal Splash)</p>
+</div>
+
+<script>
+function drawIcon(canvas) {
+  var s = canvas.width;
+  var ctx = canvas.getContext('2d');
+  var f = s / 1024; // scale factor
+
+  // Background - dark gradient
+  var bg = ctx.createRadialGradient(s/2, s/2, 0, s/2, s/2, s*0.7);
+  bg.addColorStop(0, '#0a1e3a');
+  bg.addColorStop(0.6, '#051428');
+  bg.addColorStop(1, '#020a14');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, s, s);
+
+  // Subtle stars
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  for (var i = 0; i < 60; i++) {
+    var sx = ((i * 137.508 + 50) % s);
+    var sy = ((i * 97.312 + 30) % s);
+    ctx.fillRect(sx, sy, 1.5*f, 1.5*f);
+  }
+
+  // Outer glow
+  var glow = ctx.createRadialGradient(s/2, s*0.48, 0, s/2, s*0.48, s*0.45);
+  glow.addColorStop(0, 'rgba(40,100,200,0.15)');
+  glow.addColorStop(0.7, 'rgba(20,60,140,0.08)');
+  glow.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, s, s);
+
+  // Draw 3 stacked rhombus boards (diamond shape from above)
+  var boards = [
+    { y: s*0.58, sz: 0.22, alpha: 0.35, color: '#1a3a5a' },
+    { y: s*0.48, sz: 0.28, alpha: 0.55, color: '#2a5a8a' },
+    { y: s*0.38, sz: 0.34, alpha: 0.75, color: '#3a7aba' }
+  ];
+
+  boards.forEach(function(b) {
+    var cx = s/2, cy = b.y, bsz = s * b.sz;
+    ctx.save();
+    ctx.globalAlpha = b.alpha;
+
+    // Diamond shape
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - bsz*0.5);
+    ctx.lineTo(cx + bsz, cy);
+    ctx.lineTo(cx, cy + bsz*0.5);
+    ctx.lineTo(cx - bsz, cy);
+    ctx.closePath();
+
+    // Fill with gradient
+    var tg = ctx.createLinearGradient(cx - bsz, cy, cx + bsz, cy);
+    tg.addColorStop(0, b.color);
+    tg.addColorStop(0.5, lighten(b.color, 30));
+    tg.addColorStop(1, b.color);
+    ctx.fillStyle = tg;
+    ctx.fill();
+
+    // Edge glow
+    ctx.strokeStyle = 'rgba(100,180,255,0.6)';
+    ctx.lineWidth = 2.5 * f;
+    ctx.stroke();
+
+    // Checkerboard pattern on top board
+    if (b.alpha > 0.7) {
+      var gridSize = 4;
+      for (var gx = 0; gx < gridSize; gx++) {
+        for (var gz = 0; gz < gridSize; gz++) {
+          if ((gx + gz) % 2 === 0) continue;
+          var cellW = bsz * 2 / gridSize;
+          var cellH = bsz / gridSize;
+          var px = cx - bsz + gx * cellW + cellW/2;
+          var py = cy - bsz*0.5/2 + gz * cellH;
+
+          // Transform to diamond perspective
+          var tx = cx + (px - cx) * 1 + (py - cy) * 0;
+          var ty = cy + (px - cx) * 0 + (py - cy) * 0.5;
+
+          ctx.fillStyle = 'rgba(0,20,50,0.4)';
+          ctx.beginPath();
+          var cw2 = cellW * 0.45, ch2 = cellH * 0.22;
+          ctx.moveTo(tx, ty - ch2);
+          ctx.lineTo(tx + cw2, ty);
+          ctx.lineTo(tx, ty + ch2);
+          ctx.lineTo(tx - cw2, ty);
+          ctx.closePath();
+          ctx.fill();
+        }
+      }
+    }
+
+    ctx.restore();
+  });
+
+  // Connecting pillars (vertical lines between boards)
+  ctx.strokeStyle = 'rgba(100,180,255,0.25)';
+  ctx.lineWidth = 2 * f;
+  var pillarX = [s*0.28, s*0.72, s*0.38, s*0.62];
+  pillarX.forEach(function(px) {
+    ctx.beginPath();
+    ctx.moveTo(px, s*0.35);
+    ctx.lineTo(px, s*0.60);
+    ctx.stroke();
+  });
+
+  // Chess King piece on the middle board
+  var kx = s/2, ky = s*0.32;
+
+  // King shadow
+  ctx.save();
+  ctx.globalAlpha = 0.3;
+  ctx.beginPath();
+  ctx.ellipse(kx, s*0.43, 45*f, 15*f, 0, 0, Math.PI*2);
+  ctx.fillStyle = '#000';
+  ctx.fill();
+  ctx.restore();
+
+  // King body
+  var kgrad = ctx.createLinearGradient(kx-30*f, ky, kx+30*f, ky+120*f);
+  kgrad.addColorStop(0, '#e0e8f0');
+  kgrad.addColorStop(0.5, '#c0d0e0');
+  kgrad.addColorStop(1, '#8899aa');
+  ctx.fillStyle = kgrad;
+
+  // Base
+  ctx.beginPath();
+  ctx.ellipse(kx, s*0.42, 40*f, 14*f, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  // Body cylinder
+  ctx.beginPath();
+  ctx.moveTo(kx-35*f, s*0.42);
+  ctx.lineTo(kx-20*f, s*0.32);
+  ctx.quadraticCurveTo(kx, s*0.28, kx+20*f, s*0.32);
+  ctx.lineTo(kx+35*f, s*0.42);
+  ctx.closePath();
+  ctx.fill();
+
+  // Head sphere
+  ctx.beginPath();
+  ctx.arc(kx, s*0.30, 25*f, 0, Math.PI*2);
+  ctx.fillStyle = '#d0dce8';
+  ctx.fill();
+
+  // Crown
+  ctx.strokeStyle = '#ffcc44';
+  ctx.lineWidth = 3 * f;
+  ctx.shadowColor = '#ffaa00';
+  ctx.shadowBlur = 12 * f;
+
+  // Crown cross
+  ctx.beginPath();
+  ctx.moveTo(kx, s*0.24);
+  ctx.lineTo(kx, s*0.28);
+  ctx.moveTo(kx-8*f, s*0.26);
+  ctx.lineTo(kx+8*f, s*0.26);
+  ctx.stroke();
+
+  // Crown circle
+  ctx.beginPath();
+  ctx.arc(kx, s*0.30, 30*f, 0, Math.PI*2);
+  ctx.stroke();
+
+  ctx.shadowBlur = 0;
+
+  // Visor (dark slit)
+  ctx.fillStyle = 'rgba(10,20,40,0.8)';
+  ctx.fillRect(kx-15*f, s*0.295, 30*f, 8*f);
+
+  // Eyes (blue glow)
+  ctx.shadowColor = '#44aaff';
+  ctx.shadowBlur = 8 * f;
+  ctx.fillStyle = '#44aaff';
+  ctx.beginPath();
+  ctx.arc(kx-7*f, s*0.30, 3*f, 0, Math.PI*2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(kx+7*f, s*0.30, 3*f, 0, Math.PI*2);
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
+  // "4D" text at top
+  ctx.save();
+  ctx.font = 'bold ' + Math.round(80*f) + 'px "Arial Black", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillStyle = '#fff';
+  ctx.shadowColor = 'rgba(68,170,255,0.8)';
+  ctx.shadowBlur = 20 * f;
+  ctx.fillText('4D', s/2, s*0.04);
+  ctx.shadowBlur = 0;
+  ctx.restore();
+
+  // "CHESS" text at bottom
+  ctx.save();
+  ctx.font = 'bold ' + Math.round(52*f) + 'px "Arial Black", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'bottom';
+  ctx.letterSpacing = (8*f) + 'px';
+  ctx.fillStyle = 'rgba(100,180,255,0.9)';
+  ctx.shadowColor = 'rgba(68,170,255,0.5)';
+  ctx.shadowBlur = 15 * f;
+  ctx.fillText('CHESS', s/2, s*0.95);
+  ctx.shadowBlur = 0;
+  ctx.restore();
+
+  // Bottom accent line
+  ctx.strokeStyle = 'rgba(68,170,255,0.4)';
+  ctx.lineWidth = 2*f;
+  ctx.beginPath();
+  ctx.moveTo(s*0.25, s*0.88);
+  ctx.lineTo(s*0.75, s*0.88);
+  ctx.stroke();
+
+  // Rounded corners mask (for app icon)
+  if (s >= 192) {
+    var r = s * 0.18;
+    ctx.globalCompositeOperation = 'destination-in';
+    ctx.beginPath();
+    ctx.moveTo(r, 0);
+    ctx.lineTo(s-r, 0);
+    ctx.quadraticCurveTo(s, 0, s, r);
+    ctx.lineTo(s, s-r);
+    ctx.quadraticCurveTo(s, s, s-r, s);
+    ctx.lineTo(r, s);
+    ctx.quadraticCurveTo(0, s, 0, s-r);
+    ctx.lineTo(0, r);
+    ctx.quadraticCurveTo(0, 0, r, 0);
+    ctx.closePath();
+    ctx.fill();
+    ctx.globalCompositeOperation = 'source-over';
+  }
+}
+
+function drawSplash(canvas) {
+  var s = canvas.width;
+  var ctx = canvas.getContext('2d');
+  var f = s / 2732;
+
+  // Background
+  var bg = ctx.createRadialGradient(s/2, s/2, 0, s/2, s/2, s*0.7);
+  bg.addColorStop(0, '#0a1e3a');
+  bg.addColorStop(0.5, '#051428');
+  bg.addColorStop(1, '#020a14');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, s, s);
+
+  // Stars
+  ctx.fillStyle = 'rgba(255,255,255,0.25)';
+  for (var i = 0; i < 200; i++) {
+    var sx = ((i * 137.508 + 50) % s);
+    var sy = ((i * 97.312 + 30) % s);
+    ctx.fillRect(sx, sy, 2*f, 2*f);
+  }
+
+  // Center glow
+  var glow = ctx.createRadialGradient(s/2, s/2, 0, s/2, s/2, s*0.35);
+  glow.addColorStop(0, 'rgba(40,100,200,0.15)');
+  glow.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, s, s);
+
+  // Title
+  ctx.save();
+  ctx.font = 'bold ' + Math.round(180*f) + 'px "Arial Black", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#fff';
+  ctx.shadowColor = 'rgba(68,170,255,0.8)';
+  ctx.shadowBlur = 40 * f;
+  ctx.fillText('4D', s/2, s*0.38);
+  ctx.font = 'bold ' + Math.round(120*f) + 'px "Arial Black", sans-serif';
+  ctx.fillStyle = 'rgba(100,180,255,0.9)';
+  ctx.fillText('RHOMBUS', s/2, s*0.48);
+  ctx.fillText('CHESS', s/2, s*0.56);
+  ctx.shadowBlur = 0;
+  ctx.restore();
+
+  // Accent line
+  ctx.strokeStyle = 'rgba(68,170,255,0.4)';
+  ctx.lineWidth = 3*f;
+  ctx.beginPath();
+  ctx.moveTo(s*0.3, s*0.62);
+  ctx.lineTo(s*0.7, s*0.62);
+  ctx.stroke();
+
+  // Subtitle
+  ctx.font = Math.round(40*f) + 'px "Arial", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(100,180,255,0.5)';
+  ctx.fillText('MULTI-LEVEL STRATEGIC CHESS', s/2, s*0.66);
+}
+
+function lighten(hex, amt) {
+  var c = parseInt(hex.replace('#',''), 16);
+  var r = Math.min(255, ((c>>16)&0xff) + amt);
+  var g = Math.min(255, ((c>>8)&0xff) + amt);
+  var b = Math.min(255, (c&0xff) + amt);
+  return 'rgb('+r+','+g+','+b+')';
+}
+
+// Draw all sizes
+['c1024','c512','c192','c144','c96','c48'].forEach(function(id) {
+  drawIcon(document.getElementById(id));
+});
+drawSplash(document.getElementById('splash'));
+</script>
+</body>
+</html>

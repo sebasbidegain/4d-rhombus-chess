@@ -1,0 +1,66 @@
+{
+  "name": "4d-rhombus-chess",
+  "version": "1.0.0",
+  "description": "4D Rhombus Chess - Multi-level 3D chess game",
+  "main": "electron-main.js",
+  "scripts": {
+    "build": "echo 'Build complete'",
+    "cap:init": "npx cap init RhombusChess com.rhombuschess.app --web-dir www",
+    "cap:add:android": "npx cap add android",
+    "cap:add:ios": "npx cap add ios",
+    "cap:sync": "npx cap sync",
+    "cap:open:android": "npx cap open android",
+    "cap:open:ios": "npx cap open ios",
+    "electron": "electron .",
+    "electron:build": "electron-builder --win portable",
+    "electron:installer": "electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.rhombuschess4d.app",
+    "productName": "4D Rhombus Chess",
+    "files": [
+      "www/**/*",
+      "!www/admin.html",
+      "electron-main.js",
+      "build/icon.ico"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "portable": {
+      "artifactName": "4D-Rhombus-Chess-Windows.exe"
+    }
+  },
+  "keywords": [
+    "chess",
+    "3d",
+    "game",
+    "mobile"
+  ],
+  "author": "Sebastian",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@capacitor/android": "^8.3.1",
+    "@capacitor/cli": "^8.3.1",
+    "@capacitor/core": "^8.3.1",
+    "@capacitor/ios": "^8.3.1",
+    "@capacitor/splash-screen": "^8.0.1",
+    "@capacitor/status-bar": "^8.0.2"
+  },
+  "devDependencies": {
+    "@electron/packager": "^20.0.0",
+    "electron": "^41.3.0",
+    "electron-builder": "^26.8.1",
+    "jimp": "^1.6.1",
+    "png-to-ico": "^3.0.1"
+  }
+}

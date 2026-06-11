@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://www.gstatic.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebaseapp.com wss://*.firebaseio.com; frame-src https://accounts.google.com https://*.firebaseapp.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>4D Rhombus Chess</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html{background:#000;}
+body{background:transparent;overflow:hidden;font-family:'Share Tech Mono',monospace;color:#aaccee;user-select:none;}
+
+/* ── START SCREEN ── */
+#start{
+  position:fixed;inset:0;
+  background:radial-gradient(ellipse at 50% 30%,#071420,#000 80%);
+  z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity .6s;overflow-y:auto;padding:10px 0;
+}
+#start.gone{display:none !important;}
+#st{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(16px,3.5vw,38px);
+  letter-spacing:6px;color:#fff;margin-bottom:clamp(2px,0.5vh,6px);
+  animation:glow 2s ease-in-out infinite;}
+@keyframes glow{0%,100%{text-shadow:0 0 20px #4af8;}50%{text-shadow:0 0 50px #8df,0 0 80px #4af8;}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}}
+#ss{font-size:10px;letter-spacing:7px;color:rgba(100,180,255,.55);margin-bottom:clamp(6px,2vh,28px);}
+.box{background:rgba(0,15,30,.88);border:1px solid rgba(100,180,255,.22);border-radius:6px;padding:clamp(6px,1.5vh,14px) 20px;margin:clamp(2px,0.8vh,7px);width:min(500px,92vw);}
+.box h3{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:4px;color:rgba(100,180,255,.6);margin-bottom:10px;}
+.chars{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;}
+.cc{width:82px;padding:clamp(3px,0.8vh,8px) 4px;border-radius:4px;cursor:pointer;text-align:center;
+  background:rgba(0,20,40,.8);border:2px solid rgba(100,180,255,.18);transition:all .18s;}
+.cc:hover{border-color:rgba(100,180,255,.6);}
+.cc.on{border-color:#4af;background:rgba(10,55,115,.9);box-shadow:0 0 12px rgba(68,170,255,.3);}
+.ci{font-size:clamp(16px,2.5vh,24px);margin-bottom:clamp(1px,0.4vh,4px);}
+.cn{font-size:7px;letter-spacing:2px;color:#aaccee;}
+.row{display:flex;gap:6px;margin-top:6px;}
+.ob{flex:1;padding:7px 0;text-align:center;cursor:pointer;border-radius:3px;
+  background:rgba(0,20,40,.8);border:1px solid rgba(100,180,255,.2);
+  color:rgba(100,180,255,.6);font-family:'Share Tech Mono',monospace;
+  font-size:9px;letter-spacing:2px;transition:all .18s;}
+.ob:hover,.ob.on{background:rgba(20,60,120,.9);border-color:#4af;color:#fff;}
+#go{margin-top:clamp(6px,1.5vh,18px);padding:clamp(6px,1.2vh,12px) 50px;font-family:'Orbitron',sans-serif;font-weight:700;
+  font-size:13px;letter-spacing:5px;cursor:pointer;
+  background:linear-gradient(135deg,rgba(20,80,160,.95),rgba(10,40,100,.95));
+  border:2px solid rgba(100,180,255,.6);color:#fff;border-radius:4px;transition:all .2s;
+  box-shadow:0 0 20px rgba(50,120,255,.3);}
+#go:hover{box-shadow:0 0 40px rgba(50,150,255,.6);transform:scale(1.03);}
+
+/* ── GAME UI ── */
+#ui{position:fixed;inset:0;z-index:6;pointer-events:none;}
+
+#topbar{position:absolute;top:10px;left:50%;transform:translateX(-50%);
+  font-family:'Orbitron',sans-serif;font-weight:900;font-size:15px;letter-spacing:4px;
+  color:#fff;text-shadow:0 0 18px rgba(100,180,255,.6);white-space:nowrap;}
+#sub{position:absolute;top:32px;left:50%;transform:translateX(-50%);
+  font-size:8px;letter-spacing:5px;color:rgba(100,180,255,.5);white-space:nowrap;}
+#turnbox{position:absolute;top:55px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:10px;
+  background:rgba(0,10,20,.9);border:1px solid rgba(100,180,255,.3);
+  padding:5px 16px;border-radius:4px;white-space:nowrap;}
+#dot{width:13px;height:13px;border-radius:50%;border:2px solid rgba(255,255,255,.4);transition:all .4s;}
+#dot.w{background:#eee;box-shadow:0 0 10px rgba(255,255,255,.8);}
+#dot.b{background:#778;box-shadow:0 0 10px rgba(100,120,180,.8);}
+#ttxt{font-size:10px;letter-spacing:3px;color:#aaccee;}
+#mnum{font-size:8px;letter-spacing:2px;color:rgba(100,180,255,.5);}
+#aib{font-size:7px;padding:2px 5px;border-radius:2px;background:rgba(255,100,0,.2);border:1px solid rgba(255,100,0,.4);color:#fa6;}
+#clockdisp{font-size:8px;letter-spacing:2px;color:rgba(100,180,255,.7);}
+#ait{position:absolute;top:95px;left:50%;transform:translateX(-50%);
+  font-size:9px;letter-spacing:3px;color:rgba(255,160,60,.9);
+  opacity:0;transition:opacity .3s;pointer-events:none;}
+#ait.on{opacity:1;}
+#stat{position:absolute;bottom:130px;left:50%;transform:translateX(-50%);
+  background:rgba(0,10,20,.9);border:1px solid rgba(100,180,255,.2);
+  padding:5px 14px;border-radius:3px;font-size:9px;letter-spacing:2px;
+  color:rgba(180,220,255,.9);max-width:90vw;text-align:center;}
+#log{position:absolute;top:55px;left:14px;
+  background:rgba(0,10,20,.85);border:1px solid rgba(100,180,255,.2);
+  padding:8px 11px;border-radius:4px;font-size:8px;letter-spacing:2px;
+  width:140px;max-height:240px;overflow-y:auto;}
+#log h4{font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:3px;margin-bottom:6px;color:#4af;}
+.hm{padding:2px 0;border-bottom:1px solid rgba(100,180,255,.07);color:#aaccee;}
+#cap{position:absolute;top:55px;right:14px;
+  background:rgba(0,10,20,.85);border:1px solid rgba(100,180,255,.2);
+  padding:8px 11px;border-radius:4px;font-size:8px;letter-spacing:2px;min-width:128px;}
+#cap h4{font-family:'Orbitron',sans-serif;font-size:7px;letter-spacing:3px;margin-bottom:6px;color:#4af;}
+.cr{display:flex;justify-content:space-between;margin:2px 0;}
+.cv{color:#eee;}
+#chkmsg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Orbitron',sans-serif;font-size:36px;font-weight:900;
+  color:#f44;text-shadow:0 0 30px #f00;letter-spacing:6px;
+  opacity:0;transition:opacity .5s;pointer-events:none;white-space:nowrap;}
+#hint{position:absolute;bottom:130px;right:14px;
+  font-size:7px;letter-spacing:1px;color:rgba(100,180,255,.3);line-height:1.9;text-align:right;}
+
+/* ── BUTTONS ── */
+#btns{position:fixed;bottom:8px;left:8px;
+  display:flex;flex-direction:column;gap:3px;z-index:10;pointer-events:auto;}
+#btns2{position:fixed;bottom:8px;right:8px;
+  display:flex;flex-direction:column;gap:3px;z-index:10;align-items:flex-end;pointer-events:auto;}
+.brow{display:flex;gap:3px;}
+button.b{padding:7px 10px;cursor:pointer;
+  background:rgba(0,15,35,.97);border:1px solid rgba(100,180,255,.4);
+  color:rgba(100,180,255,.9);font-family:'Share Tech Mono',monospace;
+  font-size:9px;letter-spacing:1px;border-radius:3px;transition:all .18s;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;pointer-events:auto;}
+button.b:hover{background:rgba(20,60,130,.97);border-color:#4af;color:#fff;}
+button.b.on{background:rgba(10,50,110,.97);border-color:#4af;color:#fff;}
+button.b.sm{padding:5px 7px;font-size:8px;letter-spacing:1px;}
+
+/* ── PROMOTION OVERLAY ── */
+#promo-overlay{position:fixed;inset:0;z-index:35;display:none;align-items:center;justify-content:center;
+  background:rgba(0,5,15,.85);}
+#promo-overlay.show{display:flex;}
+#promo-inner{background:rgba(0,15,30,.95);border:1px solid rgba(100,180,255,.4);border-radius:8px;
+  padding:20px 24px;text-align:center;}
+#promo-inner h3{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:3px;color:#fff;margin-bottom:14px;}
+.promo-choices{display:flex;gap:10px;justify-content:center;}
+.promo-btn{width:70px;height:70px;cursor:pointer;border-radius:6px;
+  background:rgba(0,20,40,.9);border:2px solid rgba(100,180,255,.3);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  color:#aaccee;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;transition:all .2s;}
+.promo-btn:hover{border-color:#4af;background:rgba(20,60,120,.9);color:#fff;}
+.promo-btn .promo-icon{font-size:28px;}
+:root{--scan-alpha:0.015;}
+.scan{position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,var(--scan-alpha)) 2px,rgba(0,0,0,var(--scan-alpha)) 4px);pointer-events:none;z-index:0;transition:opacity .3s;}
+body.no-scan .scan{opacity:0;}
+
+/* ── TOOLTIP ── */
+#tooltip{position:fixed;z-index:30;pointer-events:none;
+  background:rgba(0,10,25,.92);border:1px solid rgba(100,180,255,.4);
+  padding:4px 10px;border-radius:3px;font-size:9px;letter-spacing:1px;
+  color:#aaccee;white-space:nowrap;display:none;
+  box-shadow:0 0 10px rgba(0,30,80,.6);}
+
+/* ── LEVEL SLIDER ── */
+#lvlslider-wrap{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:10;
+  display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:auto;}
+#lvlslider-wrap label{font-size:7px;letter-spacing:2px;color:rgba(100,180,255,.5);}
+#lvlslider{writing-mode:bt-lr;width:20px;height:120px;
+  accent-color:#4af;cursor:pointer;}
+
+/* ── WIN/LOSS RECORD ── */
+#wlrec{font-size:7px;letter-spacing:1px;color:rgba(100,180,255,.5);margin-top:6px;text-align:center;}
+
+/* ── TUTORIAL OVERLAY ── */
+#tutorial{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;
+  background:rgba(0,5,15,.88);}
+#tutorial.show{display:flex;}
+#tutinner{background:rgba(0,15,30,.95);border:1px solid rgba(100,180,255,.3);border-radius:8px;
+  padding:24px 30px;max-width:min(560px,92vw);max-height:85vh;overflow-y:auto;
+  font-size:11px;line-height:1.8;color:#aaccee;}
+#tutinner h2{font-family:'Orbitron',sans-serif;font-size:14px;letter-spacing:4px;color:#fff;margin-bottom:12px;}
+#tutinner h3{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:3px;color:#4af;margin:14px 0 6px;}
+#tutinner .close-tut{margin-top:16px;padding:8px 30px;cursor:pointer;
+  background:rgba(20,60,130,.9);border:1px solid #4af;color:#fff;
+  font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;border-radius:3px;}
+
+/* ── PUZZLE MODE ── */
+#puz-banner{position:absolute;top:55px;left:50%;transform:translateX(-50%);
+  background:rgba(0,40,10,.92);border:1px solid rgba(60,220,100,.45);
+  padding:5px 16px;border-radius:4px;font-size:8px;letter-spacing:3px;
+  color:rgba(80,230,110,.95);white-space:nowrap;display:none;pointer-events:none;}
+#puz-banner.show{display:block;}
+#puz-result{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  background:rgba(0,12,28,.97);border:2px solid rgba(80,220,100,.6);
+  padding:28px 40px;border-radius:10px;text-align:center;z-index:50;
+  display:none;flex-direction:column;align-items:center;gap:14px;
+  box-shadow:0 0 40px rgba(40,180,80,.25);}
+#puz-result.show{display:flex;}
+#puz-result-msg{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:900;
+  letter-spacing:4px;color:#4f8;}
+#puz-result-sub{font-size:9px;letter-spacing:3px;color:rgba(100,200,130,.7);}
+.puz-btns{display:flex;gap:10px;}
+#puz-go-btn{margin-top:6px;padding:9px 40px;font-family:'Orbitron',sans-serif;font-weight:700;
+  font-size:11px;letter-spacing:4px;cursor:pointer;
+  background:linear-gradient(135deg,rgba(10,100,40,.95),rgba(5,60,20,.95));
+  border:2px solid rgba(60,220,100,.7);color:#4f8;border-radius:4px;
+  transition:all .2s;box-shadow:0 0 16px rgba(40,200,80,.2);}
+#puz-go-btn:hover{box-shadow:0 0 30px rgba(60,220,100,.5);color:#fff;}
+
+/* ── AUTH MODAL ── */
+#auth-modal{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:90;
+  display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+#auth-modal.show{display:flex;}
+#auth-box{background:radial-gradient(ellipse at 50% 0%,#051a0c,#020d06);
+  border:1px solid rgba(60,200,90,.4);border-radius:10px;padding:32px 36px;
+  width:340px;max-width:94vw;display:flex;flex-direction:column;gap:16px;
+  box-shadow:0 0 60px rgba(30,180,70,.12);}
+#auth-title{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:900;
+  letter-spacing:4px;color:rgba(80,220,110,.95);text-align:center;}
+.auth-tabs{display:flex;gap:0;border-bottom:1px solid rgba(60,200,90,.25);}
+.auth-tab{flex:1;padding:8px;font-family:'Share Tech Mono',monospace;font-size:10px;
+  letter-spacing:3px;color:rgba(80,200,110,.5);cursor:pointer;text-align:center;
+  background:none;border:none;border-bottom:2px solid transparent;transition:all .2s;}
+.auth-tab.active{color:rgba(80,220,110,.95);border-bottom:2px solid rgba(80,220,110,.8);}
+.auth-field{display:flex;flex-direction:column;gap:5px;}
+.auth-field label{font-size:9px;letter-spacing:2px;color:rgba(80,200,110,.6);}
+.auth-field input{background:rgba(0,30,10,.7);border:1px solid rgba(60,200,90,.3);
+  border-radius:4px;padding:9px 12px;color:rgba(180,240,200,.95);font-family:'Share Tech Mono',monospace;
+  font-size:13px;outline:none;transition:border-color .2s;}
+.auth-field input:focus{border-color:rgba(60,200,90,.8);}
+#auth-err{font-size:9px;letter-spacing:1px;color:rgba(255,80,80,.9);text-align:center;
+  min-height:14px;}
+#auth-submit{padding:11px;font-family:'Orbitron',sans-serif;font-weight:700;font-size:11px;
+  letter-spacing:4px;cursor:pointer;background:linear-gradient(135deg,rgba(10,100,40,.95),rgba(5,60,20,.95));
+  border:2px solid rgba(60,220,100,.6);color:#4f8;border-radius:4px;transition:all .2s;}
+#auth-submit:hover{box-shadow:0 0 20px rgba(60,220,100,.4);color:#fff;}
+#auth-google{padding:10px;font-family:'Share Tech Mono',monospace;font-size:10px;
+  letter-spacing:2px;cursor:pointer;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.2);color:rgba(200,220,210,.8);border-radius:4px;
+  transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+#auth-google:hover{background:rgba(255,255,255,.1);color:#fff;}
+.auth-sep{display:flex;align-items:center;gap:10px;font-size:9px;letter-spacing:2px;
+  color:rgba(80,200,110,.3);}
+.auth-sep::before,.auth-sep::after{content:'';flex:1;height:1px;background:rgba(60,200,90,.2);}
+#auth-close{position:absolute;top:12px;right:16px;background:none;border:none;
+  color:rgba(80,200,110,.5);font-size:18px;cursor:pointer;line-height:1;}
+#auth-close:hover{color:rgba(80,220,110,.9);}
+
+/* ── USER BADGE (start screen) ── */
+#user-badge{position:absolute;top:14px;right:16px;display:flex;align-items:center;gap:8px;}
+#user-avatar{width:34px;height:34px;border-radius:50%;border:2px solid rgba(60,200,90,.5);
+  background:rgba(10,60,20,.8);display:flex;align-items:center;justify-content:center;
+  font-family:'Orbitron',sans-serif;font-size:12px;font-weight:900;color:#4f8;
+  cursor:pointer;overflow:hidden;}
+#user-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+#user-name{font-size:9px;letter-spacing:2px;color:rgba(80,220,110,.8);}
+#user-signout{font-size:8px;letter-spacing:2px;color:rgba(80,200,110,.4);cursor:pointer;
+  text-decoration:underline;}
+#user-signout:hover{color:rgba(80,220,110,.8);}
+#signin-btn{padding:6px 14px;font-family:'Share Tech Mono',monospace;font-size:9px;
+  letter-spacing:2px;cursor:pointer;background:transparent;
+  border:1px solid rgba(60,200,90,.4);color:rgba(80,200,110,.7);border-radius:4px;
+  transition:all .2s;}
+#signin-btn:hover{border-color:rgba(60,200,90,.9);color:rgba(80,220,110,.95);}
+</style>
+</head>
+<body>
+
+<!-- START SCREEN -->
+<div id="start">
+  <div id="st">4D RHOMBUS CHESS</div>
+  <div id="ss">MULTI-LEVEL STRATEGIC CHESS</div>
+  <div class="box">
+    <h3>CHOOSE YOUR ARMY</h3>
+    <div class="chars">
+      <div class="cc on" data-t="trooper" role="button" tabindex="0"><div class="ci" aria-hidden="true">🪖</div><div class="cn">TROOPER</div></div>
+      <div class="cc" data-t="robot" role="button" tabindex="0"><div class="ci" aria-hidden="true">🤖</div><div class="cn">ROBOTS</div></div>
+      <div class="cc" data-t="crystal" role="button" tabindex="0"><div class="ci" aria-hidden="true">💎</div><div class="cn">CRYSTALS</div></div>
+      <div class="cc" data-t="medieval" role="button" tabindex="0"><div class="ci" aria-hidden="true">⚔️</div><div class="cn">MEDIEVAL</div></div>
+      <div class="cc" data-t="alien" role="button" tabindex="0"><div class="ci" aria-hidden="true">👾</div><div class="cn">ALIENS</div></div>
+      <div class="cc" data-t="popeye" role="button" tabindex="0"><div class="ci" aria-hidden="true">🫒</div><div class="cn">POPEYE</div></div>
+      <div class="cc" data-t="greek" role="button" tabindex="0"><div class="ci" aria-hidden="true">⚡</div><div class="cn">GREEK</div></div>
+    </div>
+  </div>
+  <div class="box">
+    <h3>BOARD SIZE</h3>
+    <div class="row">
+      <div class="ob on" id="ss-15l" role="button" tabindex="0">15 LEVELS</div>
+      <div class="ob" id="ss-7l" role="button" tabindex="0">7 LEVELS</div>
+    </div>
+    <h3 style="margin-top:11px">GAME MODE</h3>
+    <div class="row">
+      <div class="ob on" id="ss-ai" role="button" tabindex="0">VS AI</div>
+      <div class="ob" id="ss-2p" role="button" tabindex="0">2 PLAYERS</div>
+    </div>
+    <h3 style="margin-top:11px">AI DIFFICULTY</h3>
+    <div class="row">
+      <div class="ob" id="ss-d1" role="button" tabindex="0">EASY</div>
+      <div class="ob on" id="ss-d2" role="button" tabindex="0">MEDIUM</div>
+      <div class="ob" id="ss-d3" role="button" tabindex="0">HARD</div>
+    </div>
+  </div>
+  <button id="go">▶  START GAME</button>
+  <button id="puz-go" style="margin-top:7px;padding:9px 50px;font-family:'Orbitron',sans-serif;font-weight:700;font-size:11px;letter-spacing:4px;cursor:pointer;background:linear-gradient(135deg,rgba(10,80,30,.95),rgba(5,50,15,.95));border:2px solid rgba(60,200,90,.5);color:rgba(80,210,110,.95);border-radius:4px;transition:all .2s;">🧩  PUZZLES</button>
+
+  <!-- User badge (top-right of start screen) -->
+  <div id="user-badge">
+    <div id="user-badge-guest" style="display:flex;align-items:center;">
+      <button id="signin-btn" onclick="showAuthModal('login')">⬡ SIGN IN</button>
+    </div>
+    <div id="user-badge-loggedin" style="display:none;flex-direction:column;align-items:flex-end;gap:2px;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div id="user-name"></div>
+        <div id="user-avatar"><span id="user-initials">?</span></div>
+      </div>
+      <span id="user-signout" onclick="authSignOut()">SIGN OUT</span>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+  <div id="auth-box" style="position:relative;">
+    <button id="auth-close" onclick="hideAuthModal()">✕</button>
+    <div id="auth-title">RHOMBUS CHESS</div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">LOG IN</button>
+      <button class="auth-tab" id="tab-signup" onclick="switchAuthTab('signup')">SIGN UP</button>
+    </div>
+    <div id="auth-name-field" class="auth-field" style="display:none;">
+      <label for="auth-name">DISPLAY NAME</label>
+      <input type="text" id="auth-name" placeholder="Your name" autocomplete="name">
+    </div>
+    <div class="auth-field">
+      <label for="auth-email">EMAIL</label>
+      <input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email">
+    </div>
+    <div class="auth-field">
+      <label for="auth-pass">PASSWORD</label>
+      <input type="password" id="auth-pass" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <div id="auth-err"></div>
+    <button id="auth-submit" onclick="authSubmit()">LOG IN</button>
+    <div class="auth-sep">OR</div>
+    <button id="auth-google" onclick="authGoogle()">
+      <svg width="16" height="16" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/></svg>
+      CONTINUE WITH GOOGLE
+    </button>
+  </div>
+</div>
+
+<!-- TOOLTIP -->
+<div id="tooltip"></div>
+
+<!-- TUTORIAL OVERLAY -->
+<div id="tutorial" role="dialog" aria-modal="true" aria-labelledby="tut-title">
+  <div id="tutinner">
+    <h2 id="tut-title">HOW TO PLAY</h2>
+    <h3>PIECES &amp; MOVEMENT</h3>
+    Pieces move like standard chess: King (1 sq any dir), Queen (any dir slide), Rook (straight slide), Bishop (diagonal slide), Knight (L-shape), Pawn (forward, captures diagonal).<br>
+    <h3>3D LEVELS</h3>
+    The board has 15 vertical levels stacked in a rhombus shape. The middle level (8) is full 8-wide; levels above and below get narrower. Pieces can move between levels:<br>
+    - Pawns: move forward along X-axis, up/down one level (white up, black down)<br>
+    - Rooks: slide along level axis<br>
+    - Bishops: slide diagonally across levels<br>
+    - Queens: slide any direction including across levels<br>
+    - Kings: step one square in any 3D direction<br>
+    - Knights: L-shapes that can cross one level<br>
+    <h3>RHOMBUS SHAPE</h3>
+    The board narrows as you go away from the center level. Pieces on narrower levels have fewer horizontal squares. If a piece's X coordinate exceeds the level width, it cannot go there.<br>
+    <h3>CONTROLS</h3>
+    - Click/tap a piece to select, then click a highlighted square to move<br>
+    - Drag to orbit the camera, scroll/pinch to zoom<br>
+    - Use camera buttons (TOP, SIDE, W.POV, B.POV) for preset views<br>
+    - Use the level slider to isolate specific levels<br>
+    <h3>WINNING</h3>
+    Capture the enemy King or achieve Checkmate. Stalemate is a draw.<br>
+    <button class="close-tut" onclick="document.getElementById('tutorial').classList.remove('show')">GOT IT</button>
+  </div>
+</div>
+
+<!-- INFO OVERLAY -->
+<div id="ui" role="main">
+  <div id="topbar">4D RHOMBUS CHESS</div>
+  <div id="sub"></div>
+  <div id="turnbox">
+    <div id="dot" class="w"></div>
+    <div id="ttxt">YOUR TURN</div>
+    <div id="mnum">MOVE 1</div>
+    <div id="aib">VS AI</div>
+    <div id="clockdisp">W: 0:00 | B: 0:00</div>
+  </div>
+  <div id="ait">⚙ AI CALCULATING...</div>
+  <div id="stat">PRESS START GAME</div>
+  <div id="log"><h4>MOVE LOG</h4><div id="ll"></div></div>
+  <div id="cap"><h4>CAPTURED</h4>
+    <div class="cr"><span>WHITE LOST:</span><span class="cv" id="wl">—</span></div>
+    <div class="cr"><span>BLACK LOST:</span><span class="cv" id="bl">—</span></div>
+    <div id="wlrec">W:0 L:0 D:0</div>
+  </div>
+  <div id="chkmsg">CHECK!</div>
+  <div id="a11y-announce" aria-live="assertive" aria-atomic="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"></div>
+  <div id="hint">DRAG: ORBIT<br>SCROLL/PINCH: ZOOM<br>CLICK/TAP: SELECT PIECE</div>
+  <div id="puz-banner"></div>
+</div>
+
+<!-- PUZZLE RESULT OVERLAY -->
+<div id="puz-result" role="dialog" aria-modal="true" aria-labelledby="puz-result-msg">
+  <div id="puz-result-msg">✓ CHECKMATE!</div>
+  <div id="puz-result-sub">PUZZLE SOLVED</div>
+  <div class="puz-btns">
+    <button class="b" onclick="puzzleRetry()">↺ RETRY</button>
+    <button id="puz-go-btn" onclick="nextPuzzle()">→ NEXT PUZZLE</button>
+  </div>
+  <button class="b sm" onclick="exitPuzzleMode()" style="margin-top:4px;letter-spacing:1px;">✕ EXIT PUZZLES</button>
+</div>
+
+<!-- LEVEL SLIDER -->
+<div id="lvlslider-wrap">
+  <label for="lvlslider">LEVELS</label>
+  <input type="range" id="lvlslider" min="1" max="15" value="15" orient="vertical" aria-valuemin="1" aria-valuemax="15" aria-valuenow="15" aria-label="Visible levels">
+  <span id="lvlval" style="font-size:8px;color:#4af;" aria-live="polite">15</span>
+</div>
+
+<!-- BUTTONS LEFT -->
+<div id="btns">
+  <div class="brow"><button class="b on" id="b-ai" aria-pressed="true">VS AI</button><button class="b" id="b-2p" aria-pressed="false">2 PLAYER</button></div>
+  <div class="brow"><button class="b" id="b-diff">MEDIUM</button><button class="b" id="b-theme">🪖 THEME</button></div>
+  <div class="brow"><button class="b" id="b-lvls">15 LEVELS</button><button class="b" id="b-reset">⟳ NEW</button></div>
+  <div class="brow"><button class="b" id="b-menu">☰ MENU</button><button class="b" id="b-resign">⚑ RESIGN</button></div>
+</div>
+
+<!-- BUTTONS RIGHT -->
+<div id="btns2">
+  <div class="brow"><button class="b sm" id="b-top">TOP</button><button class="b sm" id="b-side">SIDE</button><button class="b sm" id="b-wpov">W.POV</button><button class="b sm" id="b-bpov">B.POV</button></div>
+  <div class="brow"><button class="b sm" id="b-undo">↩ UNDO</button><button class="b sm" id="b-save">💾</button><button class="b sm" id="b-load">📂</button></div>
+  <div class="brow"><button class="b sm" id="b-export">📋</button><button class="b sm" id="b-tut">? HELP</button><button class="b sm" id="b-scan">▦ SCAN</button></div>
+</div>
+
+<!-- PROMOTION OVERLAY -->
+<div id="promo-overlay">
+  <div id="promo-inner">
+    <h3>PROMOTE PAWN</h3>
+    <div class="promo-choices">
+      <div class="promo-btn" data-piece="queen"><div class="promo-icon">♛</div>QUEEN</div>
+      <div class="promo-btn" data-piece="rook"><div class="promo-icon">♜</div>ROOK</div>
+      <div class="promo-btn" data-piece="bishop"><div class="promo-icon">♝</div>BISHOP</div>
+      <div class="promo-btn" data-piece="knight"><div class="promo-icon">♞</div>KNIGHT</div>
+    </div>
+  </div>
+</div>
+<div class="scan"></div>
+
+<script src="js/three.min.js"></script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js" integrity="sha256-Nn0Lmu8KjAhxcTXGfUvMJqXUpxA+Ioodp8M67bkeKF8=" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js" integrity="sha256-U95PIlY5RIUeXL3k2J6TCZawAwGQSttpdn2ei4FMgkc=" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js" integrity="sha256-ua48QvAadxwUVaIoPxr7+tGGb3KMJCgoFrcVwV+NsEA=" crossorigin="anonymous"></script>
+<script src="js/index-game.js"></script>
+</body>
+</html>
