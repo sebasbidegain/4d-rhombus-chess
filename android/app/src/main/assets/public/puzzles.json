@@ -1,0 +1,6039 @@
+{
+  "generated": "2026-05-30T23:33:00.837Z",
+  "engine": "RhombusChess 4D v4",
+  "levels": 15,
+  "total": 100,
+  "puzzles": [
+    {
+      "id": "mate_in_1_001",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 1,
+            "x": 0,
+            "z": 3
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_002",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 2,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_003",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 3,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 3,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_004",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 2,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_005",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 3,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 3,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_006",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 4,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 4,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_007",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 3,
+          "x": 0,
+          "z": 5,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 3,
+            "x": 0,
+            "z": 5
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_008",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 4,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 4,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_009",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 5,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 5,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_010",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 4,
+          "x": 0,
+          "z": 6,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 4,
+            "x": 0,
+            "z": 6
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_011",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 5,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 5,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_012",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 6,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 6,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_013",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 5,
+          "x": 0,
+          "z": 7,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 5,
+            "x": 0,
+            "z": 7
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_014",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 6,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 6,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_015",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 7,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_016",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 1,
+            "x": 1,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_017",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 7,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_018",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 8,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 8,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_019",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 2,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 2,
+            "x": 2,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_020",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 8,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 8,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_021",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 9,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 9,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_022",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 3,
+          "x": 3,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 3,
+            "x": 3,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_023",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 9,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 9,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_024",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 10,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 10,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_025",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 4,
+          "x": 4,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 4,
+            "x": 4,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_026",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 10,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 10,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_027",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 11,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 11,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_028",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 5,
+          "x": 5,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 5,
+            "x": 5,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_029",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 11,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 11,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_030",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 12,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 12,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_031",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 6,
+          "x": 6,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 6,
+            "x": 6,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_032",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 12,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 12,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_033",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 13,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 13,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_034",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 7,
+            "x": 7,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_035",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 13,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 13,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_036",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 14,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 14,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_037",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 1,
+            "x": 0,
+            "z": 3
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_038",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 14,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 14,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_039",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 1,
+            "x": 1,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_040",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 2,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_041",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 2,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_042",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 2,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 2,
+            "x": 2,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_043",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 3,
+          "x": 0,
+          "z": 5,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 3,
+            "x": 0,
+            "z": 5
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_044",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 3,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 3,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_045",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 3,
+          "x": 3,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 3,
+            "x": 3,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_046",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 4,
+          "x": 0,
+          "z": 6,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 4,
+            "x": 0,
+            "z": 6
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_047",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 4,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 4,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_048",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 4,
+          "x": 4,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 4,
+            "x": 4,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_049",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 5,
+          "x": 0,
+          "z": 7,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 5,
+            "x": 0,
+            "z": 7
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_050",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 5,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 5,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_051",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 5,
+          "x": 5,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 5,
+            "x": 5,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_052",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 1,
+            "x": 1,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_053",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 6,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 6,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_054",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 6,
+          "x": 6,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 6,
+            "x": 6,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_055",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 2,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 2,
+            "x": 2,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_056",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 7,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_057",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 7,
+            "x": 7,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_058",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 3,
+          "x": 3,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 3,
+            "x": 3,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_059",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 8,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 8,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_060",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 5,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 1,
+            "x": 0,
+            "z": 5
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_061",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 4,
+          "x": 4,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 4,
+            "x": 4,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_062",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 9,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 9,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_063",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 6,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 2,
+            "x": 0,
+            "z": 6
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_064",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 5,
+          "x": 5,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 5,
+            "x": 5,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_065",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 10,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 10,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_066",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 3,
+          "x": 0,
+          "z": 7,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 3,
+            "x": 0,
+            "z": 7
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_067",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 6,
+          "x": 6,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 6,
+            "x": 6,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_068",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 11,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 11,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_069",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 3,
+          "x": 0,
+          "z": 1,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 3,
+            "x": 0,
+            "z": 1
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_070",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 7,
+            "x": 7,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_071",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 12,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 12,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_072",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 4,
+          "x": 0,
+          "z": 0,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 4,
+            "x": 0,
+            "z": 0
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_073",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 1,
+            "x": 0,
+            "z": 3
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_074",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 13,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 13,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_075",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 3,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 3,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_076",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 2,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_077",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 3,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 14,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 14,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_078",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 4,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 4,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_079",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 3,
+          "x": 0,
+          "z": 5,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 3,
+            "x": 0,
+            "z": 5
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_080",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 2,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_081",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 5,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 5,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_082",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 4,
+          "x": 0,
+          "z": 6,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 4,
+            "x": 0,
+            "z": 6
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_083",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 3,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 3,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_084",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 6,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 6,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_085",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 5,
+          "x": 0,
+          "z": 7,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 5,
+            "x": 0,
+            "z": 7
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_086",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 4,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 4,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_087",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 7,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_088",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 5,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 1,
+            "x": 1,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_089",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 5,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 5,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_090",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 8,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 8,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_091",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 5,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 2,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 2,
+            "x": 2,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_092",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 6,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 6,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_093",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 9,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 9,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_094",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 5,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 3,
+          "x": 3,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 3,
+            "x": 3,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_095",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 7,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_096",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 10,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 10,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_097",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 5,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 4,
+          "x": 4,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 4,
+            "x": 4,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_098",
+      "type": "mate-in-1",
+      "family": "B",
+      "difficulty": "intermediate",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 3,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 8,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 8,
+            "x": 0,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_099",
+      "type": "mate-in-1",
+      "family": "D",
+      "difficulty": "advanced",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 2,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 0,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 4,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 2,
+          "x": 0,
+          "z": 1,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        },
+        {
+          "l": 11,
+          "x": 0,
+          "z": 4,
+          "type": "queen",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 11,
+            "x": 0,
+            "z": 4
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "mate_in_1_100",
+      "type": "mate-in-1",
+      "family": "A",
+      "difficulty": "beginner",
+      "toMove": "white",
+      "position": [
+        {
+          "l": 0,
+          "x": 0,
+          "z": 0,
+          "type": "king",
+          "color": "black"
+        },
+        {
+          "l": 1,
+          "x": 0,
+          "z": 2,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 1,
+          "x": 1,
+          "z": 5,
+          "type": "rook",
+          "color": "white"
+        },
+        {
+          "l": 5,
+          "x": 5,
+          "z": 2,
+          "type": "queen",
+          "color": "white"
+        },
+        {
+          "l": 7,
+          "x": 7,
+          "z": 7,
+          "type": "king",
+          "color": "white"
+        }
+      ],
+      "solution": [
+        {
+          "from": {
+            "l": 5,
+            "x": 5,
+            "z": 2
+          },
+          "to": {
+            "l": 0,
+            "x": 0,
+            "z": 2
+          }
+        }
+      ]
+    }
+  ]
+}
