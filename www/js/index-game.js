@@ -1563,6 +1563,15 @@ document.getElementById('b-save').onclick=function(){saveGame();};
 document.getElementById('b-load').onclick=function(){loadGame();};
 document.getElementById('b-export').onclick=function(){exportGame();};
 document.getElementById('b-tut').onclick=function(){document.getElementById('tutorial').classList.toggle('show');};
+// A11Y — dismiss tutorial by clicking the backdrop or pressing Escape (beta-test fix)
+(function(){
+  var tut=document.getElementById('tutorial');
+  if(!tut)return;
+  tut.addEventListener('click',function(e){if(e.target===tut)tut.classList.remove('show');});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&tut.classList.contains('show'))tut.classList.remove('show');
+  });
+})();
 // L6 — Scanline toggle with localStorage persistence
 (function(){var off=localStorage.getItem('rc_scan_off')==='1';if(off)document.body.classList.add('no-scan');document.getElementById('b-scan').classList.toggle('on',off);})();
 document.getElementById('b-scan').onclick=function(){
