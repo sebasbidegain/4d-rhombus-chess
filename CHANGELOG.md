@@ -140,3 +140,4 @@ Format: version · date · what changed and why.
 5. Run the build — the APK will be named `rhombuschess-vX.X-debug.apk` automatically
 # test
 # test line
+
