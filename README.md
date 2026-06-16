@@ -132,6 +132,17 @@ See [CHANGELOG.md](CHANGELOG.md) v1.7–v1.8 for full details.
 
 ---
 
-## License
+## License & Privacy
 
-MIT — do whatever you want with it.
+- **License:** [MIT](LICENSE) — do whatever you want with it.
+- **Privacy:** see [PRIVACY.md](PRIVACY.md). The game collects no personal data; all saves and preferences stay in local device storage.
+
+## Store submission
+
+The latest [release](https://github.com/sebasbidegain/4d-rhombus-chess/releases) ships **signed, store-ready Android builds**:
+- `rhombuschess-vX.X-release.aab` — upload to **Google Play Console**
+- `rhombuschess-vX.X-release.apk` — signed APK for direct install/sideload
+
+Release signing uses `android/rhombus-release.keystore` with credentials in `android/keystore.properties` (both gitignored). **Back these up** — the same key must sign every future Play Store update.
+
+iOS still needs an Apple Developer account ($99/yr) for a real-device/TestFlight build; only simulator builds exist so far.
