@@ -369,6 +369,11 @@ var ADMIN_PASS_HASH = "a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e
 var fbAuth=null, fbDb=null, usingFirebase=false, sessionStart=null;
 var SESSION_TIMEOUT_MS = 30 * 60 * 1000; // 30 min idle timeout
 var _sessionInterval=null, _activityBound=false;
+// Named activity handlers so they can be removed on logout (security fix S-1)
+function _onActivity(){sessionStart=Date.now();}
+// Absolute session ceiling (security fix S-2) — 8 hours regardless of activity
+var SESSION_MAX_MS = 8 * 60 * 60 * 1000;
+var _sessionAbsoluteStart=null;
 
 // ── Secure hash (Web Crypto) ──────────────────────────
 async function sha256(str){
@@ -392,7 +397,13 @@ async function doLogin(){
       if(emailEl&&!email){emailEl.style.display='block';document.getElementById('login-err').textContent='Enter your email too.';return;}
       var cred=await fbAuth.signInWithEmailAndPassword(email,p);
       var uid=cred.user.uid;
-      if(!ADMIN_UIDS.length||ADMIN_UIDS.indexOf(uid)===-1){
+      // SECURITY: hard-block if allowlist is empty — never fall through in production
+      if(!ADMIN_UIDS.length){
+        fbAuth.signOut();
+        document.getElementById('login-err').textContent='Admin access not configured.';
+        document.getElementById('admin-pass').value='';return;
+      }
+      if(ADMIN_UIDS.indexOf(uid)===-1){
         fbAuth.signOut();
         document.getElementById('login-err').textContent='Access denied.';
         document.getElementById('admin-pass').value='';return;
@@ -419,27 +430,35 @@ async function doLogin(){
 
 function unlockAdmin(){
   sessionStart=Date.now();
+  _sessionAbsoluteStart=Date.now();
   document.getElementById('login-screen').classList.add('gone');
   document.getElementById('app').classList.add('show');
   initFirebase();
   loadData();
-  // Auto-logout after idle timeout — guard against stacking on re-login
+  // Auto-logout on idle OR absolute ceiling — guard against stacking on re-login
   if(_sessionInterval)clearInterval(_sessionInterval);
   _sessionInterval=setInterval(function(){
-    if(sessionStart&&Date.now()-sessionStart>SESSION_TIMEOUT_MS){doLogout();}
+    var now=Date.now();
+    var idleExpired=sessionStart&&(now-sessionStart>SESSION_TIMEOUT_MS);
+    var absExpired=_sessionAbsoluteStart&&(now-_sessionAbsoluteStart>SESSION_MAX_MS);
+    if(idleExpired||absExpired){doLogout();}
   },60000);
-  // Reset timer on user activity — bind only once
+  // Reset idle timer on user activity — use named function so it can be removed
   if(!_activityBound){
     _activityBound=true;
-    document.addEventListener('mousemove',function(){sessionStart=Date.now();});
-    document.addEventListener('keydown',function(){sessionStart=Date.now();});
+    document.addEventListener('mousemove',_onActivity);
+    document.addEventListener('keydown',_onActivity);
   }
 }
 
 function doLogout(){
   if(fbAuth)fbAuth.signOut();
-  sessionStart=null;
+  sessionStart=null;_sessionAbsoluteStart=null;
   if(_sessionInterval){clearInterval(_sessionInterval);_sessionInterval=null;}
+  // Remove named activity listeners to prevent memory/logic leak across sessions
+  document.removeEventListener('mousemove',_onActivity);
+  document.removeEventListener('keydown',_onActivity);
+  _activityBound=false;
   document.getElementById('login-screen').classList.remove('gone');
   document.getElementById('app').classList.remove('show');
   document.getElementById('admin-pass').value='';
@@ -484,21 +503,55 @@ function loadFirebaseData(){
 }
 
 // ── Local data (localStorage fallback) ───────────────
+// NOTE: localStorage user data is untrusted (any script on the page can write it).
+// We intentionally do NOT pass rc_users into the render pipeline.
+// Instead we show an error state for the users table and activity list,
+// and only surface the numeric win/loss/draw record (no user-supplied strings).
 function loadLocalData(){
-  try{
-    var raw=localStorage.getItem('rc_users')||'{}';
-    var usersObj=JSON.parse(raw);
-    var users=Object.values(usersObj).map(function(u){
-      return {id:u.uid,displayName:u.displayName,email:u.email,
-              puzzlesSolved:u.puzzlesSolved||0,created:u.created,_local:true,
-              games:u.games||{w:0,l:0,d:0}};
-    });
-    // Also grab record from game localStorage
-    var rec15={w:0,l:0,d:0},rec7={w:0,l:0,d:0};
-    try{rec15=JSON.parse(localStorage.getItem('rhombus_chess_record')||'{"w":0,"l":0,"d":0}');}catch(e){}
-    try{rec7=JSON.parse(localStorage.getItem('rhombus_chess_easier_record')||'{"w":0,"l":0,"d":0}');}catch(e){}
-    renderAll(users,'local',{rec15:rec15,rec7:rec7});
-  }catch(e){renderAll([],'local');}
+  // Show error state in users table
+  var tbody=document.getElementById('users-tbody');
+  while(tbody.firstChild)tbody.removeChild(tbody.firstChild);
+  var errTr=document.createElement('tr');
+  var errTd=document.createElement('td');
+  errTd.setAttribute('colspan','6');
+  errTd.style.textAlign='center';
+  errTd.style.padding='30px';
+  errTd.style.color='var(--muted)';
+  errTd.textContent='Firebase not configured — connect Firebase to view users';
+  errTr.appendChild(errTd);
+  tbody.appendChild(errTr);
+
+  // Show error state in activity list
+  var list=document.getElementById('activity-list');
+  while(list.firstChild)list.removeChild(list.firstChild);
+  var errLi=document.createElement('li');
+  errLi.className='tl-item';
+  var errDot=document.createElement('div');
+  errDot.className='tl-dot signup';
+  var errText=document.createElement('div');
+  errText.className='tl-text';
+  errText.textContent='Firebase not configured';
+  errLi.appendChild(errDot);
+  errLi.appendChild(errText);
+  list.appendChild(errLi);
+
+  // Read numeric win/loss/draw stats only — safe because we parse as int before use
+  var rec15={w:0,l:0,d:0},rec7={w:0,l:0,d:0};
+  try{rec15=JSON.parse(localStorage.getItem('rhombus_chess_record')||'{"w":0,"l":0,"d":0}');}catch(e){}
+  try{rec7=JSON.parse(localStorage.getItem('rhombus_chess_easier_record')||'{"w":0,"l":0,"d":0}');}catch(e){}
+  var totalW=parseInt(rec15.w||0)+parseInt(rec7.w||0);
+  var totalL=parseInt(rec15.l||0)+parseInt(rec7.l||0);
+  var totalD=parseInt(rec15.d||0)+parseInt(rec7.d||0);
+  var totalGames=totalW+totalL+totalD;
+
+  drawPie(totalW,totalL,totalD);
+  setText('pie-w',totalW);setText('pie-l',totalL);setText('pie-d',totalD);
+  setText('stat-games',totalGames||'—');
+  setText('stat-games-sub','W:'+totalW+' L:'+totalL+' D:'+totalD);
+  setText('stat-users','—');setText('stat-users-sub','Firebase not configured');
+  setText('stat-puzzles','—');setText('stat-android','—');setText('stat-desktop','—');setText('stat-avgpuz','—');
+
+  showNotif('Firebase not configured — showing local record only','warn');
 }
 
 // ── Render everything ─────────────────────────────────
@@ -592,49 +645,148 @@ function esc(s){
 
 function renderUsersTable(users,source){
   var tbody=document.getElementById('users-tbody');
+  // Clear existing rows safely
+  while(tbody.firstChild)tbody.removeChild(tbody.firstChild);
   if(!users.length){
-    tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:30px;color:var(--muted);">'+
-      (source==='local'?'No local accounts yet — users will appear after sign-up.':'No users found in Firestore.')+'</td></tr>';
+    var emptyTr=document.createElement('tr');
+    var emptyTd=document.createElement('td');
+    emptyTd.setAttribute('colspan','6');
+    emptyTd.style.textAlign='center';
+    emptyTd.style.padding='30px';
+    emptyTd.style.color='var(--muted)';
+    emptyTd.textContent=source==='local'
+      ?'No local accounts yet — users will appear after sign-up.'
+      :'No users found in Firestore.';
+    emptyTr.appendChild(emptyTd);
+    tbody.appendChild(emptyTr);
     return;
   }
-  tbody.innerHTML=users.map(function(u){
-    var name=esc(u.displayName||u.name||'Anonymous');
-    var initials=esc(name.replace(/&\w+;/g,'').split(' ').map(function(w){return w[0]||'';}).join('').substring(0,2).toUpperCase()||'?');
-    var email=esc(u.email||'—');
+  users.forEach(function(u){
+    // Compute initials from raw name — no escaping needed, goes into textContent
+    var rawName=u.displayName||u.name||'Anonymous';
+    var initials=rawName.split(' ').map(function(w){return w[0]||'';}).join('').substring(0,2).toUpperCase()||'?';
     var joined=u.created?new Date(u.created.seconds?u.created.seconds*1000:u.created).toLocaleDateString():'—';
-    var auth=source==='firebase'?'<span class="badge firebase">Firebase</span>':'<span class="badge local">Local</span>';
     var puz=parseInt(u.puzzlesSolved)||0;
     var g=u.games||u.record||{w:0,l:0,d:0};
     var games=parseInt(g.w||0)+'/'+parseInt(g.l||0)+'/'+parseInt(g.d||0);
-    return '<tr><td><div class="avatar-cell"><div class="mini-av">'+initials+'</div>'+name+'</div></td>'+
-      '<td style="color:var(--muted);">'+email+'</td><td style="color:var(--muted);">'+esc(joined)+'</td>'+
-      '<td>'+auth+'</td><td>'+puz+'</td><td style="font-family:\'Share Tech Mono\',monospace;">'+games+'</td></tr>';
-  }).join('');
+
+    var tr=document.createElement('tr');
+
+    // USER cell — avatar + name
+    var tdUser=document.createElement('td');
+    var avatarDiv=document.createElement('div');
+    avatarDiv.className='avatar-cell';
+    var miniAv=document.createElement('div');
+    miniAv.className='mini-av';
+    miniAv.textContent=initials;
+    var nameSpan=document.createElement('span');
+    nameSpan.textContent=rawName;
+    avatarDiv.appendChild(miniAv);
+    avatarDiv.appendChild(nameSpan);
+    tdUser.appendChild(avatarDiv);
+    tr.appendChild(tdUser);
+
+    // EMAIL cell
+    var tdEmail=document.createElement('td');
+    tdEmail.style.color='var(--muted)';
+    tdEmail.textContent=u.email||'—';
+    tr.appendChild(tdEmail);
+
+    // JOINED cell
+    var tdJoined=document.createElement('td');
+    tdJoined.style.color='var(--muted)';
+    tdJoined.textContent=joined;
+    tr.appendChild(tdJoined);
+
+    // AUTH badge cell
+    var tdAuth=document.createElement('td');
+    var badge=document.createElement('span');
+    badge.className=source==='firebase'?'badge firebase':'badge local';
+    badge.textContent=source==='firebase'?'Firebase':'Local';
+    tdAuth.appendChild(badge);
+    tr.appendChild(tdAuth);
+
+    // PUZZLES cell
+    var tdPuz=document.createElement('td');
+    tdPuz.textContent=puz;
+    tr.appendChild(tdPuz);
+
+    // GAMES cell
+    var tdGames=document.createElement('td');
+    tdGames.style.fontFamily='\'Share Tech Mono\',monospace';
+    tdGames.textContent=games;
+    tr.appendChild(tdGames);
+
+    tbody.appendChild(tr);
+  });
 }
 
 // ── Activity timeline ─────────────────────────────────
 function renderActivity(users,source){
   var list=document.getElementById('activity-list');
   var items=[];
+  // Collect raw (unescaped) names — textContent handles encoding
   users.slice(0,8).forEach(function(u){
-    var name=esc(u.displayName||u.name||'Anonymous');
+    var name=u.displayName||u.name||'Anonymous';
     var ts=u.created?(u.created.seconds?u.created.seconds*1000:u.created):Date.now();
     items.push({type:'signup',name:name,ts:ts});
     if(u.puzzlesSolved)items.push({type:'puzzle',name:name,count:parseInt(u.puzzlesSolved)||0,ts:ts+60000});
   });
   items.sort(function(a,b){return b.ts-a.ts;});
+
+  // Clear list safely
+  while(list.firstChild)list.removeChild(list.firstChild);
+
   if(!items.length){
-    list.innerHTML='<li class="tl-item"><div class="tl-dot signup"></div><div class="tl-text">No activity yet</div></li>';
+    var emptyLi=document.createElement('li');
+    emptyLi.className='tl-item';
+    var emptyDot=document.createElement('div');
+    emptyDot.className='tl-dot signup';
+    var emptyText=document.createElement('div');
+    emptyText.className='tl-text';
+    emptyText.textContent='No activity yet';
+    emptyLi.appendChild(emptyDot);
+    emptyLi.appendChild(emptyText);
+    list.appendChild(emptyLi);
     return;
   }
-  list.innerHTML=items.slice(0,10).map(function(it){
+
+  items.slice(0,10).forEach(function(it){
     var ago=timeAgo(it.ts);
-    var text=it.type==='signup'?'<strong>'+it.name+'</strong> signed up':
-             it.type==='puzzle'?'<strong>'+it.name+'</strong> solved '+it.count+' puzzle'+(it.count!==1?'s':''):
-             '<strong>'+it.name+'</strong> played a game';
-    return '<li class="tl-item"><div class="tl-dot '+it.type+'"></div>'+
-      '<div><div class="tl-text">'+text+'</div><div class="tl-time">'+esc(ago)+'</div></div></li>';
-  }).join('');
+
+    var li=document.createElement('li');
+    li.className='tl-item';
+
+    var dot=document.createElement('div');
+    dot.className='tl-dot '+it.type;
+    li.appendChild(dot);
+
+    var wrapper=document.createElement('div');
+
+    // Build the tl-text node using DOM — <strong> for name, text nodes for the rest
+    var textDiv=document.createElement('div');
+    textDiv.className='tl-text';
+    var strong=document.createElement('strong');
+    strong.textContent=it.name;
+    textDiv.appendChild(strong);
+    if(it.type==='signup'){
+      textDiv.appendChild(document.createTextNode(' signed up'));
+    }else if(it.type==='puzzle'){
+      var suffix=' solved '+it.count+' puzzle'+(it.count!==1?'s':'');
+      textDiv.appendChild(document.createTextNode(suffix));
+    }else{
+      textDiv.appendChild(document.createTextNode(' played a game'));
+    }
+    wrapper.appendChild(textDiv);
+
+    var timeDiv=document.createElement('div');
+    timeDiv.className='tl-time';
+    timeDiv.textContent=ago;
+    wrapper.appendChild(timeDiv);
+
+    li.appendChild(wrapper);
+    list.appendChild(li);
+  });
 }
 
 function timeAgo(ts){

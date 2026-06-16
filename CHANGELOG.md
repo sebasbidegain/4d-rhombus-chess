@@ -2,6 +2,19 @@
 
 ---
 
+## v1.9 — 2026-06-13
+**File:** `rhombuschess-v1.9-debug.apk`
+
+### Bug Fixes (from full frontend beta test)
+- **Tutorial modal could trap the user (both games):** The first-run tutorial opened as a full-screen modal that intercepted all pointer events, so a player who didn't notice the GOT IT button was effectively stuck — no game buttons were clickable. Added the two standard dismiss patterns: **clicking the backdrop** (with an `e.target` guard so clicks inside the content don't close it) and **pressing Escape**. Verified 6/6 with Playwright.
+- **Deprecated vertical-slider CSS (both games):** The level slider used soon-to-be-removed CSS — `appearance:slider-vertical` in easier.html (Chrome deprecation warning) and `writing-mode:bt-lr` in index.html (legacy syntax already removed from modern browsers, so the desktop slider was rendering incorrectly). Replaced both with the WHATWG-standard `writing-mode:vertical-lr; direction:rtl`, so the high value (all levels) sits at the top. Verified: slider renders vertical, value drives level visibility correctly, deprecation warning gone.
+
+### Project / Repository
+- Added **LICENSE** (MIT) and **PRIVACY.md** (privacy policy) — required for app-store submission.
+- Beta test completed on both desktop (`index.html`) and mobile (`easier.html`): all 7 themes render, full move + AI loop works, save/load works, camera and menu controls work.
+
+---
+
 ## v1.8 — 2026-06-08
 **File:** `rhombuschess-v1.8-debug.apk`
 

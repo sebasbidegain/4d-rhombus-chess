@@ -60,3 +60,5 @@ GoogleService-Info.plist
 # Gradle
 .gradle/
 build/
+android/keystore.properties
+android/rhombus-release.keystore
