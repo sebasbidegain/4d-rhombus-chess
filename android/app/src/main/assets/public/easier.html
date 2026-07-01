@@ -228,7 +228,7 @@ body.no-scan .scan{opacity:0;}
     - Use the level slider to isolate specific levels<br>
     <h3>WINNING</h3>
     Capture the enemy King or achieve Checkmate. Stalemate is a draw.<br>
-    <button class="close-tut" onclick="document.getElementById('tutorial').classList.remove('show')">GOT IT</button>
+    <button class="close-tut" id="tut-close-btn">GOT IT</button>
   </div>
 </div>
 
@@ -261,10 +261,10 @@ body.no-scan .scan{opacity:0;}
   <div id="puz-result-msg">✓ CHECKMATE!</div>
   <div id="puz-result-sub">PUZZLE SOLVED</div>
   <div class="puz-btns">
-    <button class="b" onclick="puzzleRetry()">↺ RETRY</button>
-    <button class="b" id="puz-go-btn" onclick="nextPuzzle()">→ NEXT PUZZLE</button>
+    <button class="b" id="puz-retry-btn">↺ RETRY</button>
+    <button class="b" id="puz-go-btn">→ NEXT PUZZLE</button>
   </div>
-  <button class="b sm" onclick="exitPuzzleMode()">✕ EXIT PUZZLES</button>
+  <button class="b sm" id="puz-exit-btn">✕ EXIT PUZZLES</button>
 </div>
 
 <!-- LEVEL SLIDER -->

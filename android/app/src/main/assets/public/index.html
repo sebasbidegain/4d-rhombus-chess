@@ -280,14 +280,14 @@ body.no-scan .scan{opacity:0;}
   <!-- User badge (top-right of start screen) -->
   <div id="user-badge">
     <div id="user-badge-guest" style="display:flex;align-items:center;">
-      <button id="signin-btn" onclick="showAuthModal('login')">⬡ SIGN IN</button>
+      <button id="signin-btn">⬡ SIGN IN</button>
     </div>
     <div id="user-badge-loggedin" style="display:none;flex-direction:column;align-items:flex-end;gap:2px;">
       <div style="display:flex;align-items:center;gap:8px;">
         <div id="user-name"></div>
         <div id="user-avatar"><span id="user-initials">?</span></div>
       </div>
-      <span id="user-signout" onclick="authSignOut()">SIGN OUT</span>
+      <span id="user-signout">SIGN OUT</span>
     </div>
   </div>
 </div>
@@ -295,11 +295,11 @@ body.no-scan .scan{opacity:0;}
 <!-- AUTH MODAL -->
 <div id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
   <div id="auth-box" style="position:relative;">
-    <button id="auth-close" onclick="hideAuthModal()">✕</button>
+    <button id="auth-close">✕</button>
     <div id="auth-title">RHOMBUS CHESS</div>
     <div class="auth-tabs">
-      <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">LOG IN</button>
-      <button class="auth-tab" id="tab-signup" onclick="switchAuthTab('signup')">SIGN UP</button>
+      <button class="auth-tab active" id="tab-login">LOG IN</button>
+      <button class="auth-tab" id="tab-signup">SIGN UP</button>
     </div>
     <div id="auth-name-field" class="auth-field" style="display:none;">
       <label for="auth-name">DISPLAY NAME</label>
@@ -314,9 +314,9 @@ body.no-scan .scan{opacity:0;}
       <input type="password" id="auth-pass" placeholder="••••••••" autocomplete="current-password">
     </div>
     <div id="auth-err"></div>
-    <button id="auth-submit" onclick="authSubmit()">LOG IN</button>
+    <button id="auth-submit">LOG IN</button>
     <div class="auth-sep">OR</div>
-    <button id="auth-google" onclick="authGoogle()">
+    <button id="auth-google">
       <svg width="16" height="16" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/></svg>
       CONTINUE WITH GOOGLE
     </button>
@@ -349,7 +349,7 @@ body.no-scan .scan{opacity:0;}
     - Use the level slider to isolate specific levels<br>
     <h3>WINNING</h3>
     Capture the enemy King or achieve Checkmate. Stalemate is a draw.<br>
-    <button class="close-tut" onclick="document.getElementById('tutorial').classList.remove('show')">GOT IT</button>
+    <button class="close-tut" id="tut-close-btn">GOT IT</button>
   </div>
 </div>
 
@@ -383,10 +383,10 @@ body.no-scan .scan{opacity:0;}
   <div id="puz-result-msg">✓ CHECKMATE!</div>
   <div id="puz-result-sub">PUZZLE SOLVED</div>
   <div class="puz-btns">
-    <button class="b" onclick="puzzleRetry()">↺ RETRY</button>
-    <button id="puz-go-btn" onclick="nextPuzzle()">→ NEXT PUZZLE</button>
+    <button class="b" id="puz-retry-btn">↺ RETRY</button>
+    <button id="puz-go-btn">→ NEXT PUZZLE</button>
   </div>
-  <button class="b sm" onclick="exitPuzzleMode()" style="margin-top:4px;letter-spacing:1px;">✕ EXIT PUZZLES</button>
+  <button class="b sm" id="puz-exit-btn" style="margin-top:4px;letter-spacing:1px;">✕ EXIT PUZZLES</button>
 </div>
 
 <!-- LEVEL SLIDER -->

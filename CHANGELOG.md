@@ -11,6 +11,10 @@
 - **Reflective materials** — added `envMapIntensity` to all piece and board materials (pieces 1.4, crowns/orbs 1.6, board tiles 0.7–0.8) and gave crowns/queen-orbs proper metalness. Gold reads as polished brass, marble/ceramic pieces gain soft realistic shading, glass/crystal themes catch light.
 - Applies to **both** the desktop (`index-game.js`) and mobile (`easier-game.js`) games; all 7 themes benefit. No gameplay changes.
 - Verified in-browser on both builds (Trooper, Greek, Robot) with no new console errors.
+- **Board look preserved** — after tuning, the studio reflections are applied to the *pieces only*; the board tiles keep their original dark, high-contrast appearance (the global tone-mapping/sRGB grade was reverted because it washed out the board).
+
+### Bug Fix — dead inline buttons (CSP regression)
+- The v1.8 security hardening removed `'unsafe-inline'` from the `script-src` CSP, which also silently disabled every inline `onclick="…"` handler in the HTML. This broke the tutorial **GOT IT** button, the puzzle **RETRY / NEXT / EXIT** buttons (both games), and all the sign-in/auth-modal buttons (desktop). Fixed by removing all 15 inline handlers and wiring the buttons via `addEventListener`/`onclick` in the external JS instead — CSP-compliant and functional. Verified GOT IT closes the tutorial on a real click.
 
 ---
 

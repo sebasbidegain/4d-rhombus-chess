@@ -1592,6 +1592,21 @@ document.getElementById('b-tut').onclick=function(){document.getElementById('tut
     if(e.key==='Escape'&&tut.classList.contains('show'))tut.classList.remove('show');
   });
 })();
+// CSP fix: wire buttons that previously used inline onclick (blocked by script-src 'self')
+(function(){
+  function wire(id,fn){var el=document.getElementById(id);if(el)el.onclick=fn;}
+  wire('tut-close-btn',function(){document.getElementById('tutorial').classList.remove('show');});
+  wire('puz-retry-btn',function(){puzzleRetry();});
+  wire('puz-go-btn',function(){nextPuzzle();});
+  wire('puz-exit-btn',function(){exitPuzzleMode();});
+  wire('signin-btn',function(){showAuthModal('login');});
+  wire('user-signout',function(){authSignOut();});
+  wire('auth-close',function(){hideAuthModal();});
+  wire('tab-login',function(){switchAuthTab('login');});
+  wire('tab-signup',function(){switchAuthTab('signup');});
+  wire('auth-submit',function(){authSubmit();});
+  wire('auth-google',function(){authGoogle();});
+})();
 // L6 — Scanline toggle with localStorage persistence
 (function(){var off=localStorage.getItem('rc_scan_off')==='1';if(off)document.body.classList.add('no-scan');document.getElementById('b-scan').classList.toggle('on',off);})();
 document.getElementById('b-scan').onclick=function(){
