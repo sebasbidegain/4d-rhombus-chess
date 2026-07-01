@@ -163,10 +163,8 @@ renderer.setSize(innerWidth,innerHeight);
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 renderer.shadowMap.enabled=true;
 renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-// ── Premium PBR pipeline: correct color space + cinematic tone mapping ──
-renderer.outputEncoding=THREE.sRGBEncoding;
-renderer.toneMapping=THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure=1.15;
+// Note: global tone mapping / sRGB intentionally NOT enabled — it washed out the
+// board's dark tiles. Premium reflections come purely from the env map on pieces.
 document.body.insertBefore(renderer.domElement,document.body.firstChild);
 renderer.domElement.style.position='fixed';
 renderer.domElement.style.top='0';
