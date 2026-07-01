@@ -154,7 +154,7 @@ var threatIndicators=[];
 
 // ── Win/loss record (feature 11) ────────────────────
 var record={w:0,l:0,d:0};
-try{var savedRec=localStorage.getItem('rhombus_chess_record');if(savedRec)record=JSON.parse(savedRec);}catch(e){}
+try{var savedRec=localStorage.getItem('rhombus_chess_record');if(savedRec){var _sr=JSON.parse(savedRec);record={w:parseInt(_sr.w)||0,l:parseInt(_sr.l)||0,d:parseInt(_sr.d)||0};}}catch(e){}
 
 // ── Camera snap targets (feature 5) ─────────────────
 var camTarget=null,camTargetLookAt=null,camLerping=false;
@@ -1474,13 +1474,13 @@ function loadGame(){
       createPieceMesh(p.type,p.color,l,x,z);
     });
 
-    turn=data.turn;moveNum=data.moveNum;
-    historyLog=data.historyLog||[];
-    capW=data.capW||[];capB=data.capB||[];
+    turn=(data.turn==='black')?'black':'white';moveNum=Math.max(1,parseInt(data.moveNum)||1);
+    historyLog=Array.isArray(data.historyLog)?data.historyLog:[];
+    capW=Array.isArray(data.capW)?data.capW:[];capB=Array.isArray(data.capB)?data.capB:[];
     clockWhite=data.clockWhite||0;clockBlack=data.clockBlack||0;
     clockLastTick=Date.now();clockRunning=true;
     gameOver=data.gameOver||false;
-    undoStack=data.undoStack||[];
+    undoStack=Array.isArray(data.undoStack)?data.undoStack:[];
     enPassantTarget=data.enPassantTarget||null;
     started=true;
 
@@ -1755,7 +1755,7 @@ function localSignOut(){_lcSession(null);}
 })();
 
 function updateUserBadge(){
-  try{var _r2=localStorage.getItem('rhombus_chess_record_'+((currentUser&&currentUser.uid)||'guest'));if(_r2)record=JSON.parse(_r2);}catch(_e2){}
+  try{var _r2=localStorage.getItem('rhombus_chess_record_'+((currentUser&&currentUser.uid)||'guest'));if(_r2){var _rp=JSON.parse(_r2);record={w:parseInt(_rp.w)||0,l:parseInt(_rp.l)||0,d:parseInt(_rp.d)||0};}}catch(_e2){}
   var guest=document.getElementById('user-badge-guest');
   var loggedin=document.getElementById('user-badge-loggedin');
   if(!guest||!loggedin)return;

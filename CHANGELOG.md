@@ -2,6 +2,16 @@
 
 ---
 
+## Unreleased — post-v2.0 security follow-up (2026-07-01)
+
+Fixes from a full v2.0 security re-audit (no CRITICAL/HIGH found; prior hardening held).
+
+- **MEDIUM — admin.html brought to CSP parity:** Externalised the ~500-line inline admin script to `js/admin.js` and rewired the 5 inline `onclick`/`onkeydown` handlers via `addEventListener`, then dropped `'unsafe-inline'` from admin's `script-src`. Admin now matches the games' strict CSP. Also added SRI `integrity` hashes to admin's Firebase CDN scripts (parity with index.html). Verified: admin.js loads and runs under the tightened CSP with zero console errors; login/refresh/sign-out buttons work.
+- **LOW — save-file scalar validation (both games):** `loadGame()` now coerces `turn` to `'white'|'black'`, clamps `moveNum` to a positive integer, and guards `historyLog`/`capW`/`capB`/`undoStack` with `Array.isArray`. (The board array was already fully validated in v1.7.) Save/load round-trip verified intact.
+- **LOW — win/loss record shape check:** Records read from `localStorage` are now coerced to `{w,l,d}` integers before use, in both games and the desktop per-user path.
+
+---
+
 ## v2.0 — 2026-06-27
 **File:** `rhombuschess-v2.0-debug.apk`
 

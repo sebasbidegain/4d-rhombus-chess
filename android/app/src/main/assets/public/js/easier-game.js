@@ -147,7 +147,7 @@ var threatIndicators=[];
 
 // ── Win/loss record (feature 11) ────────────────────
 var record={w:0,l:0,d:0};
-try{var savedRec=localStorage.getItem('rhombus_chess_easier_record');if(savedRec)record=JSON.parse(savedRec);}catch(e){}
+try{var savedRec=localStorage.getItem('rhombus_chess_easier_record');if(savedRec){var _sr=JSON.parse(savedRec);record={w:parseInt(_sr.w)||0,l:parseInt(_sr.l)||0,d:parseInt(_sr.d)||0};}}catch(e){}
 
 // ── Camera snap targets (feature 5) ─────────────────
 var camTarget=null,camTargetLookAt=null,camLerping=false;
@@ -1382,13 +1382,13 @@ function loadGame(){
       createPieceMesh(p.type,p.color,l,x,z);
     });
 
-    turn=data.turn;moveNum=data.moveNum;
-    historyLog=data.historyLog||[];
-    capW=data.capW||[];capB=data.capB||[];
+    turn=(data.turn==='black')?'black':'white';moveNum=Math.max(1,parseInt(data.moveNum)||1);
+    historyLog=Array.isArray(data.historyLog)?data.historyLog:[];
+    capW=Array.isArray(data.capW)?data.capW:[];capB=Array.isArray(data.capB)?data.capB:[];
     clockWhite=data.clockWhite||0;clockBlack=data.clockBlack||0;
     clockLastTick=Date.now();clockRunning=true;
     gameOver=data.gameOver||false;
-    undoStack=data.undoStack||[];
+    undoStack=Array.isArray(data.undoStack)?data.undoStack:[];
     enPassantTarget=data.enPassantTarget||null;
     started=true;
 
