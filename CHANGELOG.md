@@ -13,6 +13,9 @@
 - Verified in-browser on both builds (Trooper, Greek, Robot) with no new console errors.
 - **Board look preserved** — after tuning, the studio reflections are applied to the *pieces only*; the board tiles keep their original dark, high-contrast appearance (the global tone-mapping/sRGB grade was reverted because it washed out the board).
 
+### Bug Fix — shadows bleeding through the board
+- Piece shadows from the single directional light were passing through the gapped, stacked board and darkening every level below. Replaced the real directional shadow (`sun.castShadow=false`) with a **fake contact shadow** — a soft radial-gradient disc parented under each piece — so every piece is grounded on its *own* level with zero bleed to lower boards. Applies to both games.
+
 ### Bug Fix — dead inline buttons (CSP regression)
 - The v1.8 security hardening removed `'unsafe-inline'` from the `script-src` CSP, which also silently disabled every inline `onclick="…"` handler in the HTML. This broke the tutorial **GOT IT** button, the puzzle **RETRY / NEXT / EXIT** buttons (both games), and all the sign-in/auth-modal buttons (desktop). Fixed by removing all 15 inline handlers and wiring the buttons via `addEventListener`/`onclick` in the external JS instead — CSP-compliant and functional. Verified GOT IT closes the tutorial on a real click.
 

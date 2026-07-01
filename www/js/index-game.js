@@ -203,9 +203,30 @@ controls.target.set(0,11,0);controls.update();
 // Lighting
 scene.add(new THREE.AmbientLight(0x1a2a3a,1.4));
 var sun=new THREE.DirectionalLight(0xffffff,1.4);
-sun.position.set(20,30,10);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);scene.add(sun);
+// Real directional shadows are OFF: on a stacked/gapped board they bleed through
+// each level onto the boards below. Pieces are grounded by fake contact shadows instead.
+sun.position.set(20,30,10);sun.castShadow=false;scene.add(sun);
 var rim=new THREE.DirectionalLight(0x4488ff,0.5);rim.position.set(-15,5,-10);scene.add(rim);
 var fillLight=new THREE.PointLight(0x002244,1.0,120);fillLight.position.set(0,15,0);scene.add(fillLight);
+
+// ── Fake contact shadow: a soft disc under each piece, grounding it on its OWN
+//    level only (no bleed to lower boards). Shared texture/material/geometry. ──
+var _contactShadowTex=(function(){
+  var c=document.createElement('canvas');c.width=64;c.height=64;
+  var g=c.getContext('2d').createRadialGradient(32,32,0,32,32,32);
+  g.addColorStop(0,'rgba(0,0,0,0.5)');g.addColorStop(0.65,'rgba(0,0,0,0.22)');g.addColorStop(1,'rgba(0,0,0,0)');
+  var ctx=c.getContext('2d');ctx.fillStyle=g;ctx.fillRect(0,0,64,64);
+  return new THREE.CanvasTexture(c);
+})();
+var _contactShadowMat=new THREE.MeshBasicMaterial({map:_contactShadowTex,transparent:true,depthWrite:false,opacity:0.9});
+var _contactShadowGeo=new THREE.PlaneGeometry(0.85,0.85);
+function makeContactShadow(){
+  var m=new THREE.Mesh(_contactShadowGeo,_contactShadowMat);
+  m.rotation.x=-Math.PI/2;      // lay flat on the board
+  m.position.y=-0.095;          // just above the tile surface (piece origin sits 0.10 above tile top)
+  m.renderOrder=1;m.userData.isContactShadow=true;
+  return m;
+}
 
 // Stars
 (function(){var g=new THREE.BufferGeometry(),p=[];
@@ -714,6 +735,7 @@ function createPieceMesh(type,color,l,x,z){
   var mesh=builders[type](mat);
   mesh.position.set(x-lhalf(l)+0.5,l*GAP+0.16,z-SZ/2+0.5);
   mesh.userData={type:type,color:color,l:l,x:x,z:z,isPiece:true};
+  mesh.add(makeContactShadow());  // grounds the piece on its own board; no bleed
   scene.add(mesh);pieceMeshes.push(mesh);
   return mesh;
 }
