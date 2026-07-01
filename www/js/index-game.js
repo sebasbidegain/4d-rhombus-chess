@@ -219,9 +219,9 @@ scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0xffffff,size:0.18}
 var MAT={};
 function buildMaterials(){
   var t=THEMES[theme];
-  MAT.light=new THREE.MeshStandardMaterial({color:t.lightTile,roughness:0.4,metalness:0.3,envMapIntensity:0.8});
-  MAT.dark=new THREE.MeshStandardMaterial({color:t.darkTile,roughness:0.6,metalness:0.2,envMapIntensity:0.7});
-  MAT.edge=new THREE.MeshStandardMaterial({color:0x223344,roughness:0.8,metalness:0.1,envMapIntensity:0.6});
+  MAT.light=new THREE.MeshStandardMaterial({color:t.lightTile,roughness:0.85,metalness:0.05,envMapIntensity:0.12});
+  MAT.dark=new THREE.MeshStandardMaterial({color:t.darkTile,roughness:0.9,metalness:0.02,envMapIntensity:0.08});
+  MAT.edge=new THREE.MeshStandardMaterial({color:0x223344,roughness:0.8,metalness:0.1,envMapIntensity:0.2});
   MAT.white=new THREE.MeshStandardMaterial({color:t.wPiece,roughness:t.wRough,metalness:t.wMetal,envMapIntensity:1.4});
   MAT.black=new THREE.MeshStandardMaterial({color:t.bPiece,roughness:t.bRough,metalness:t.bMetal,envMapIntensity:1.4});
   MAT.glow=new THREE.MeshStandardMaterial({color:t.accent,emissive:t.accent,roughness:1.0});
