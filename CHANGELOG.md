@@ -2,6 +2,18 @@
 
 ---
 
+## v2.0 — 2026-06-27
+**File:** `rhombuschess-v2.0-debug.apk`
+
+### Premium Graphics Upgrade (PBR)
+- **Cinematic render pipeline** — added sRGB output encoding + ACES Filmic tone mapping (exposure 1.15) and soft (PCF) shadows. Colours now render in the correct colour space with filmic highlight roll-off instead of clipping to flat white.
+- **Real-time studio reflections** — a soft studio-gradient environment map is generated in-browser at startup (via `PMREMGenerator`, no external files, fully offline / `file://`-safe) and applied as `scene.environment`. Every metallic and glossy surface now shows realistic reflections.
+- **Reflective materials** — added `envMapIntensity` to all piece and board materials (pieces 1.4, crowns/orbs 1.6, board tiles 0.7–0.8) and gave crowns/queen-orbs proper metalness. Gold reads as polished brass, marble/ceramic pieces gain soft realistic shading, glass/crystal themes catch light.
+- Applies to **both** the desktop (`index-game.js`) and mobile (`easier-game.js`) games; all 7 themes benefit. No gameplay changes.
+- Verified in-browser on both builds (Trooper, Greek, Robot) with no new console errors.
+
+---
+
 ## v1.9 — 2026-06-13
 **File:** `rhombuschess-v1.9-debug.apk`
 

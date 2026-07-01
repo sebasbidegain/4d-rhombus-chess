@@ -162,11 +162,33 @@ var renderer=new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(innerWidth,innerHeight);
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+// ── Premium PBR pipeline: correct color space + cinematic tone mapping ──
+renderer.outputEncoding=THREE.sRGBEncoding;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.15;
 document.body.insertBefore(renderer.domElement,document.body.firstChild);
 renderer.domElement.style.position='fixed';
 renderer.domElement.style.top='0';
 renderer.domElement.style.left='0';
 renderer.domElement.style.zIndex='1';
+
+// ── Studio environment map for realistic reflections (generated in-browser, no external files) ──
+(function(){
+  var pmrem=new THREE.PMREMGenerator(renderer);
+  var c=document.createElement('canvas');c.width=16;c.height=256;
+  var ctx=c.getContext('2d');
+  var grd=ctx.createLinearGradient(0,0,0,256);
+  grd.addColorStop(0.00,'#e6f0ff'); // bright studio sky
+  grd.addColorStop(0.35,'#8fb0d8');
+  grd.addColorStop(0.62,'#3a4a63');
+  grd.addColorStop(1.00,'#05070d'); // dark floor
+  ctx.fillStyle=grd;ctx.fillRect(0,0,16,256);
+  var tex=new THREE.CanvasTexture(c);
+  tex.mapping=THREE.EquirectangularReflectionMapping;
+  scene.environment=pmrem.fromEquirectangular(tex).texture;
+  tex.dispose();pmrem.dispose();
+})();
 
 var controls=new THREE.OrbitControls(camera,renderer.domElement);
 controls.enableDamping=true;controls.dampingFactor=0.06;
@@ -190,19 +212,19 @@ scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0xffffff,size:0.18}
 var MAT={};
 function buildMaterials(){
   var t=THEMES[theme];
-  MAT.light=new THREE.MeshStandardMaterial({color:t.lightTile,roughness:0.4,metalness:0.3});
-  MAT.dark=new THREE.MeshStandardMaterial({color:t.darkTile,roughness:0.6,metalness:0.2});
-  MAT.edge=new THREE.MeshStandardMaterial({color:0x223344,roughness:0.8,metalness:0.1});
-  MAT.white=new THREE.MeshStandardMaterial({color:t.wPiece,roughness:t.wRough,metalness:t.wMetal});
-  MAT.black=new THREE.MeshStandardMaterial({color:t.bPiece,roughness:t.bRough,metalness:t.bMetal});
+  MAT.light=new THREE.MeshStandardMaterial({color:t.lightTile,roughness:0.4,metalness:0.3,envMapIntensity:0.8});
+  MAT.dark=new THREE.MeshStandardMaterial({color:t.darkTile,roughness:0.6,metalness:0.2,envMapIntensity:0.7});
+  MAT.edge=new THREE.MeshStandardMaterial({color:0x223344,roughness:0.8,metalness:0.1,envMapIntensity:0.6});
+  MAT.white=new THREE.MeshStandardMaterial({color:t.wPiece,roughness:t.wRough,metalness:t.wMetal,envMapIntensity:1.4});
+  MAT.black=new THREE.MeshStandardMaterial({color:t.bPiece,roughness:t.bRough,metalness:t.bMetal,envMapIntensity:1.4});
   MAT.glow=new THREE.MeshStandardMaterial({color:t.accent,emissive:t.accent,roughness:1.0});
   MAT.sel=new THREE.MeshStandardMaterial({color:0x00ffcc,emissive:0x00aa88,roughness:0.2,transparent:true,opacity:0.85});
   MAT.valid=new THREE.MeshStandardMaterial({color:0x44ff44,emissive:0x22aa22,roughness:0.3,transparent:true,opacity:0.6});
   MAT.capMat=new THREE.MeshStandardMaterial({color:0xff4444,emissive:0xaa1111,roughness:0.3,transparent:true,opacity:0.7});
   MAT.check=new THREE.MeshStandardMaterial({color:0xff8800,emissive:0xcc4400,roughness:0.2,transparent:true,opacity:0.7});
   MAT.lvlUp=new THREE.MeshStandardMaterial({color:0xffdd00,emissive:0xaa8800,roughness:0.2,transparent:true,opacity:0.65});
-  MAT.crown=new THREE.MeshStandardMaterial({color:t.crown,emissive:t.crownE,roughness:0.4});
-  MAT.queenOrb=new THREE.MeshStandardMaterial({color:t.queen,emissive:t.queenE,roughness:0.2});
+  MAT.crown=new THREE.MeshStandardMaterial({color:t.crown,emissive:t.crownE,roughness:0.4,metalness:0.6,envMapIntensity:1.6});
+  MAT.queenOrb=new THREE.MeshStandardMaterial({color:t.queen,emissive:t.queenE,roughness:0.2,metalness:0.4,envMapIntensity:1.6});
   MAT.lastMove=new THREE.MeshStandardMaterial({color:0x6644cc,emissive:0x4422aa,roughness:0.3,transparent:true,opacity:0.55});
   MAT.aiPreview=new THREE.MeshStandardMaterial({color:0xff8800,emissive:0xcc5500,roughness:0.3,transparent:true,opacity:0.65});
   MAT.threat=new THREE.MeshStandardMaterial({color:0xff2222,emissive:0xcc0000,roughness:0.3,transparent:true,opacity:0.5});
